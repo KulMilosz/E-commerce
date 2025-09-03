@@ -11,33 +11,105 @@ The goal is to create a **functional online store** using **Next.js** and the pr
 ---
 
 ## ⚙️ Tech Stack
-- Next.js 14 (App Router)
-- React 18
+- Next.js 15 (App Router)
+- React 19
 - Tailwind CSS
 - TypeScript
+- Prisma ORM
+- PostgreSQL
+- Docker
 - ESLint & Prettier
 - Payment integration
+
+---
+
+## 🚀 Backend Status: ✅ COMPLETED
+
+### ✅ What's Done:
+- **Database Setup**: PostgreSQL with Docker
+- **Prisma ORM**: Schema definition and migrations
+- **API Endpoints**: 
+  - `GET /api/categories` - List all categories
+  - `GET /api/products` - List products with pagination, filtering, search
+  - `GET /api/products/[id]` - Get product details
+  - `GET /api/user/[id]` - Get user data
+- **Database Seeding**: 5 categories, 25 products (5 per category)
+- **Data Models**: User, Category, Product, Order, OrderItem
+- **Environment Setup**: Docker Compose, Prisma Studio, Database scripts
 
 ---
 
 
 ## 📂 Project Structure
 
-src/  
-- app/          - Next.js pages and routing  
-- components/   - reusable UI components   
-- styles/       - global styles  
+```
+app/
+├── api/                    # API Routes (Backend)
+│   ├── categories/         # Categories endpoints
+│   ├── products/           # Products endpoints
+│   └── user/              # User endpoints
+├── components/            # Reusable UI components
+├── generated/             # Prisma generated files (ignored)
+└── globals.css           # Global styles
+
+prisma/
+├── migrations/           # Database migrations
+├── schema.prisma        # Database schema
+└── seed.ts             # Database seeding script
+
+docker-compose.yml       # PostgreSQL container setup
+```
+
+---
+
+## 🛠️ Development Setup
+
+### Prerequisites:
+- Node.js 18+
+- Docker Desktop
+- Git
+
+### Installation:
+```bash
+# Clone repository
+git clone <repository-url>
+cd e-commerce-cursor
+
+# Install dependencies
+npm install
+
+# Start database
+npm run db:up
+
+# Run migrations and seed
+npm run db:migrate
+npm run db:seed
+
+# Start development server
+npm run dev
+```
+
+### Available Scripts:
+- `npm run dev` - Start Next.js development server
+- `npm run db:up` - Start PostgreSQL container
+- `npm run db:down` - Stop PostgreSQL container
+- `npm run db:reset` - Reset database (removes all data)
+- `npm run db:migrate` - Run database migrations
+- `npm run db:seed` - Seed database with sample data
+- `npm run db:studio` - Open Prisma Studio (database GUI)
+- `npm run dev:full` - Start database + Next.js
 
 ---
 
 ## ✅ Functional Requirements
-- Product listing page
-- Product detail page
-- Shopping cart with add/edit/remove functionality
-- Checkout form
-- Responsive design according to Figma
-- Payment integration (optional)
-- User authentication/registration (optional)
+- ✅ **Backend API** - Complete with database integration
+- ⏳ Product listing page
+- ⏳ Product detail page
+- ⏳ Shopping cart with add/edit/remove functionality
+- ⏳ Checkout form
+- ⏳ Responsive design according to Figma
+- ⏳ Payment integration (optional)
+- ⏳ User authentication/registration (optional)
 
 ---
 
