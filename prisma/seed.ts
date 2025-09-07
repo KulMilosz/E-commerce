@@ -5,7 +5,6 @@ const prisma = new PrismaClient()
 async function main() {
   console.log('🌱 Starting seed...')
 
-
   const mouse = await prisma.category.create({
     data: {
       name: 'Mouse',
@@ -52,7 +51,6 @@ async function main() {
   })
 
   console.log('✅ Categories created')
-
 
   const mouseProducts = [
     {
@@ -101,7 +99,6 @@ async function main() {
     })
   }
 
-
   const monitorProducts = [
     {
       name: 'Dell UltraSharp 27" 4K',
@@ -148,7 +145,6 @@ async function main() {
       }
     })
   }
-
 
   const headphoneProducts = [
     {
@@ -197,7 +193,6 @@ async function main() {
     })
   }
 
-
   const keyboardProducts = [
     {
       name: 'Keychron K2 V2',
@@ -244,7 +239,6 @@ async function main() {
       }
     })
   }
-
 
   const webcamProducts = [
     {
