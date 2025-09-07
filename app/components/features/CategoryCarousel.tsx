@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Category } from "../lib/categories";
+import { Category } from "../../generated/prisma";
 
 interface CategoryCarouselProps {
-  categories: Category[];
+  categories: (Category & { productCount: number })[];
 }
 
 const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
@@ -37,35 +37,45 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
   const currentCategory = categories[currentIndex];
 
   return (
-    <div className="relative w-full max-w-[1360px] mx-auto">
-      <div className="relative bg-[#222327] rounded-md border border-[#383B42] overflow-hidden" style={{ height: '452px' }}>
-        <div className="flex flex-col md:flex-row">
-          <div className="flex-1 px-30 py-20 flex flex-col justify-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
+    <div className="relative w-full max-w-[1360px] mx-auto px-4">
+      <div className="relative bg-[#222327] rounded-md border border-[#383B42] overflow-hidden h-96 md:h-[500px]">
+        <div className="flex flex-col md:flex-row h-full">
+          <div className="flex-1 px-4 md:pl-32 md:pr-12 py-8 md:pt-32 md:pb-20 flex flex-col justify-center">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6">
               {currentCategory.name}
             </h2>
-            <p className="text-gray-300 text-lg md:text-xl mb-8 leading-relaxed">
+            <p className="text-white text-sm md:text-lg mb-6 md:mb-8 leading-relaxed">
               {currentCategory.exploreInfo}
             </p>
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-[#F29145] text-sm font-medium">
-                {currentCategory.productCount} products available
-              </span>
-            </div>
             <Link
               href={`/products?category=${currentCategory.name.toLowerCase()}`}
-              className="inline-block bg-[#F29145] hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-md transition-colors duration-300 self-start"
+              className="inline-flex bg-[#222327] border border-[#F29145] text-[#F29145] hover:bg-[#F29145] hover:text-black w-full sm:w-52 h-12 sm:h-14 rounded-md transition-colors duration-300 self-start items-center justify-center gap-3.5 font-medium text-sm sm:text-base py-3 sm:py-3.5 px-4 sm:px-5"
             >
-              Explore category
+              <span>Explore Category</span>
+              <img 
+                src="/arrow-right.svg" 
+                alt="arrow right" 
+                width="24" 
+                height="24"
+                className="opacity-100"
+              />
             </Link>
           </div>
 
-          <div className="flex-1 relative bg-gray-700 flex items-center justify-center" style={{ height: '452px' }}>
+          <div className="flex-1 relative bg-transparent flex items-center justify-center" style={{ height: '500px' }}>
             {currentCategory.image ? (
               <img
                 src={currentCategory.image}
                 alt={currentCategory.name}
                 className="w-full h-full object-cover"
+                style={{
+                  width: currentCategory.name === 'Mouse' ? '450px' : '100%',
+                  height: currentCategory.name === 'Mouse' ? '800px' : '100%',
+                  transform: currentCategory.name === 'Mouse' ? 'rotate(-34.55deg) translateY(-60px)' : 'none',
+                  opacity: currentCategory.name === 'Mouse' ? 1 : 1,
+                  objectFit: currentCategory.name === 'Mouse' ? 'contain' : 'cover',
+                  background: 'transparent'
+                }}
               />
             ) : (
               <div className="text-gray-400 text-center">
@@ -129,4 +139,3 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
 };
 
 export default CategoryCarousel;
-
