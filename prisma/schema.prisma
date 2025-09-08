@@ -38,13 +38,14 @@ model Category {
 
 
 model Product {
-  id          String  @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
   description String
-  price       Decimal @db.Decimal(10, 2)
+  price       Decimal  @db.Decimal(10, 2)
   stock       Int
   imageUrl    String
   categoryId  String
+  createdAt   DateTime @default(now())
 
 
   category   Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)

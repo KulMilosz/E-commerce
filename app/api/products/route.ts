@@ -7,22 +7,24 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '10');
+    const limit = parseInt(searchParams.get('limit') || searchParams.get('show') || '10');
     const category = searchParams.get('category');
-    const search = searchParams.get('search');
-
+    const minPrice = searchParams.get('minPrice');
+    const maxPrice = searchParams.get('maxPrice');
+    const sortBy = searchParams.get('sortBy') || 'latest';
 
     const where: any = {};
     
-    if (category) {
+    if (category && category !== 'all') {
       where.categoryId = category;
     }
+
+    if (minPrice) {
+      where.price = { ...where.price, gte: parseFloat(minPrice) };
+    }
     
-    if (search) {
-      where.OR = [
-        { name: { contains: search, mode: 'insensitive' } },
-        { description: { contains: search, mode: 'insensitive' } }
-      ];
+    if (maxPrice) {
+      where.price = { ...where.price, lte: parseFloat(maxPrice) };
     }
 
 
@@ -32,7 +34,11 @@ export async function GET(request: NextRequest) {
     const [products, total] = await Promise.all([
       prisma.product.findMany({
         where,
-        include: {
+        select: {
+          id: true,
+          name: true,
+          price: true,
+          imageUrl: true,
           category: {
             select: {
               name: true
@@ -41,9 +47,10 @@ export async function GET(request: NextRequest) {
         },
         skip,
         take: limit,
-        orderBy: {
-          name: 'asc'
-        }
+        orderBy: sortBy === 'latest' ? { createdAt: 'desc' } : 
+                 sortBy === 'price-low' ? { price: 'asc' } :
+                 sortBy === 'price-high' ? { price: 'desc' } :
+                 sortBy === 'name' ? { name: 'asc' } : { createdAt: 'desc' }
       }),
       prisma.product.count({ where })
     ]);
@@ -54,12 +61,11 @@ export async function GET(request: NextRequest) {
       products: products.map(product => ({
         id: product.id,
         name: product.name,
-        description: product.description,
         price: parseFloat(product.price.toString()),
-        stock: product.stock,
         imageUrl: product.imageUrl,
-        categoryId: product.categoryId,
-        categoryName: product.category.name
+        category: {
+          name: product.category.name
+        }
       })),
       pagination: {
         page,
