@@ -6,10 +6,57 @@ async function main() {
   console.log("🌱 Starting seed...");
 
   const existingCategories = await prisma.category.findMany();
-  if (existingCategories.length > 0) {
-    console.log("✅ Categories already exist, skipping creation");
+  const existingBrands = await prisma.brand.findMany();
+  const existingProducts = await prisma.product.findMany();
+  
+  if (existingCategories.length > 0 && existingBrands.length > 0 && existingProducts.length > 0) {
+    console.log("✅ Data already exists, skipping creation");
     return;
   }
+
+  console.log("🏢 Creating brands...");
+  const brands = await Promise.all([
+    prisma.brand.create({
+      data: {
+        name: "ROG",
+        logoUrl: "https://i.ibb.co/fV3thkc5/ROG-Logo.png"
+      }
+    }),
+    prisma.brand.create({
+      data: {
+        name: "Logitech", 
+        logoUrl: "https://i.ibb.co/TMTxqjNw/Logitech-Logo.png"
+      }
+    }),
+    prisma.brand.create({
+      data: {
+        name: "JBL",
+        logoUrl: "https://i.ibb.co/V00Hb6hb/JBL-Logo.png"
+      }
+    }),
+    prisma.brand.create({
+      data: {
+        name: "AOC",
+        logoUrl: "https://i.ibb.co/d0VQKhDV/AOC-Logo.png"
+      }
+    }),
+    prisma.brand.create({
+      data: {
+        name: "Razer",
+        logoUrl: "https://i.ibb.co/8Dw1SD8Y/Razer-Logo.png"
+      }
+    }),
+    prisma.brand.create({
+      data: {
+        name: "Rexus",
+        logoUrl: "https://i.ibb.co/396nn7ht/Rexus-Logo.png"
+      }
+    })
+  ]);
+
+  console.log("✅ Brands created:", brands.length);
+
+  console.log("📦 Creating categories...");
 
   const mouse = await prisma.category.create({
     data: {
@@ -67,6 +114,7 @@ async function main() {
       price: 99.99,
       stock: 25,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[1].id,
     },
     {
       name: "Razer DeathAdder V3",
@@ -74,28 +122,32 @@ async function main() {
       price: 69.99,
       stock: 30,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[4].id,
     },
     {
-      name: "Apple Magic Mouse 2",
+      name: "Rexus Daxa Air II",
       description:
-        "Wireless mouse with multi-touch surface and rechargeable battery",
+        "Wireless gaming mouse with RGB lighting and ergonomic design",
       price: 79.99,
       stock: 20,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[5].id,
     },
     {
-      name: "SteelSeries Rival 600",
-      description: "Dual sensor gaming mouse with customizable weight system",
+      name: "ROG Gladius III",
+      description: "Gaming mouse with 36,000 DPI sensor and customizable buttons",
       price: 79.99,
       stock: 15,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[0].id,
     },
     {
-      name: "Microsoft Surface Mouse",
-      description: "Bluetooth mouse with premium design and quiet clicking",
+      name: "Logitech G Pro X Superlight",
+      description: "Ultra-lightweight gaming mouse with HERO sensor",
       price: 39.99,
       stock: 40,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[1].id,
     },
   ];
 
@@ -110,41 +162,46 @@ async function main() {
 
   const monitorProducts = [
     {
-      name: 'Dell UltraSharp 27" 4K',
+      name: 'AOC 27" 4K UHD',
       description: "27-inch 4K monitor with 99% sRGB color accuracy",
       price: 399.99,
       stock: 15,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[3].id,
     },
     {
-      name: 'ASUS ROG Swift 24" 144Hz',
+      name: 'ROG Swift 24" 144Hz',
       description:
         "Gaming monitor with 144Hz refresh rate and 1ms response time",
       price: 249.99,
       stock: 20,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[0].id,
     },
     {
-      name: 'LG UltraWide 34" Curved',
+      name: 'AOC UltraWide 34" Curved',
       description:
         "34-inch curved ultrawide monitor for productivity and gaming",
       price: 499.99,
       stock: 12,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[3].id,
     },
     {
-      name: 'Samsung Odyssey G7 32"',
+      name: 'ROG Strix 32" QHD',
       description: "32-inch QHD gaming monitor with 240Hz refresh rate",
       price: 599.99,
       stock: 8,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[0].id,
     },
     {
-      name: 'Apple Studio Display 27"',
-      description: "27-inch 5K Retina display with True Tone technology",
+      name: 'AOC Pro 27" 5K',
+      description: "27-inch 5K display with professional color accuracy",
       price: 1599.99,
       stock: 5,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[3].id,
     },
   ];
 
@@ -159,41 +216,46 @@ async function main() {
 
   const headphoneProducts = [
     {
-      name: "Sony WH-1000XM5",
+      name: "JBL Live 660NC",
       description:
         "Wireless noise-canceling headphones with 30-hour battery life",
       price: 399.99,
       stock: 25,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[2].id,
     },
     {
-      name: "Bose QuietComfort 45",
-      description: "Premium noise-canceling headphones with superior comfort",
+      name: "JBL Quantum 800",
+      description: "Gaming headset with active noise cancellation and RGB",
       price: 329.99,
       stock: 20,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[2].id,
     },
     {
-      name: "SteelSeries Arctis 7P",
+      name: "Razer BlackShark V2 Pro",
       description: "Wireless gaming headset with 2.4GHz lossless audio",
       price: 149.99,
       stock: 30,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[4].id,
     },
     {
-      name: "Audio-Technica ATH-M50x",
+      name: "JBL Tune 750BTNC",
       description:
-        "Professional studio monitor headphones with detachable cable",
+        "Wireless headphones with active noise cancellation",
       price: 149.99,
       stock: 35,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[2].id,
     },
     {
-      name: "HyperX Cloud Alpha S",
-      description: "Gaming headset with 7.1 surround sound and bass adjustment",
+      name: "ROG Delta S",
+      description: "Gaming headset with 7.1 surround sound and RGB",
       price: 99.99,
       stock: 40,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[0].id,
     },
   ];
 
@@ -208,26 +270,29 @@ async function main() {
 
   const keyboardProducts = [
     {
-      name: "Keychron K2 V2",
+      name: "Rexus Daxa M84 Pro",
       description: "Wireless mechanical keyboard with hot-swappable switches",
       price: 79.99,
       stock: 30,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[5].id,
     },
     {
-      name: "Corsair K95 RGB Platinum",
-      description: "Mechanical gaming keyboard with Cherry MX switches and RGB",
+      name: "ROG Strix Scope II",
+      description: "Mechanical gaming keyboard with ROG NX switches and RGB",
       price: 199.99,
       stock: 15,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[0].id,
     },
     {
-      name: "Logitech MX Keys",
+      name: "Logitech MX Keys Mini",
       description:
         "Wireless keyboard with backlit keys and multi-device connectivity",
       price: 99.99,
       stock: 25,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[1].id,
     },
     {
       name: "Razer BlackWidow V4 Pro",
@@ -235,14 +300,16 @@ async function main() {
       price: 229.99,
       stock: 18,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[4].id,
     },
     {
-      name: "Apple Magic Keyboard",
+      name: "Logitech G915 TKL",
       description:
-        "Wireless keyboard with rechargeable battery and scissor mechanism",
+        "Wireless gaming keyboard with low-profile mechanical switches",
       price: 99.99,
       stock: 35,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[1].id,
     },
   ];
 
@@ -262,6 +329,7 @@ async function main() {
       price: 69.99,
       stock: 40,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[1].id,
     },
     {
       name: "Razer Kiyo Pro",
@@ -269,27 +337,31 @@ async function main() {
       price: 199.99,
       stock: 15,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[4].id,
     },
     {
-      name: "Elgato FaceCam",
-      description: "Professional webcam with Sony STARVIS sensor",
+      name: "ROG Eye S",
+      description: "Professional webcam with 4K recording and RGB",
       price: 199.99,
       stock: 12,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[0].id,
     },
     {
-      name: "Microsoft LifeCam Studio",
+      name: "Logitech StreamCam",
       description: "1080p HD webcam with TrueColor technology",
       price: 79.99,
       stock: 25,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[1].id,
     },
     {
-      name: "Corsair Elgato FaceCam Pro",
+      name: "Rexus StreamCam Pro",
       description: "4K webcam with advanced image processing",
       price: 299.99,
       stock: 8,
       imageUrl: "https://via.placeholder.com/300x300",
+      brandId: brands[5].id,
     },
   ];
 
@@ -351,7 +423,7 @@ async function main() {
     data: {
       orderId: order1.id,
       productId: (await prisma.product.findFirst({
-        where: { name: "Sony WH-1000XM5" },
+        where: { name: "JBL Live 660NC" },
       }))!.id,
       quantity: 1,
       priceAtPurchase: 399.99,
@@ -362,7 +434,7 @@ async function main() {
     data: {
       orderId: order2.id,
       productId: (await prisma.product.findFirst({
-        where: { name: 'Dell UltraSharp 27" 4K' },
+        where: { name: 'AOC 27" 4K UHD' },
       }))!.id,
       quantity: 1,
       priceAtPurchase: 399.99,

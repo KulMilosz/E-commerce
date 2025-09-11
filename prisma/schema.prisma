@@ -37,6 +37,18 @@ model Category {
 }
 
 
+model Brand {
+  id      String @id @default(cuid())
+  name    String
+  logoUrl String
+
+
+  products Product[]
+
+  @@map("brands")
+}
+
+
 model Product {
   id          String   @id @default(cuid())
   name        String
@@ -45,10 +57,12 @@ model Product {
   stock       Int
   imageUrl    String
   categoryId  String
+  brandId     String
   createdAt   DateTime @default(now())
 
 
   category   Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  brand      Brand      @relation(fields: [brandId], references: [id], onDelete: Cascade)
   orderItems OrderItem[]
 
   @@map("products")

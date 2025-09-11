@@ -1,4 +1,5 @@
-import { Product, Category } from '../generated/prisma';
+import { Product, Category } from "../generated/prisma";
+import { ReactNode } from "react";
 
 export interface ProductWithNumericPrice {
   id: string;
@@ -6,11 +7,14 @@ export interface ProductWithNumericPrice {
   price: number;
   imageUrl: string;
   category: { name: string };
+  brand: { name: string; logoUrl: string };
 }
 
-export interface ProductDetails extends Omit<Product, 'price' | 'categoryId'> {
+export interface ProductDetails
+  extends Omit<Product, "price" | "categoryId" | "brandId"> {
   price: number;
   category: { name: string };
+  brand: { name: string; logoUrl: string };
 }
 
 export interface ProductFilters {
@@ -64,4 +68,59 @@ export interface CartItem {
   quantity: number;
 }
 
-export interface CartContentProps {}
+export interface CategoryCarouselProps {
+  categories: (Category & { productCount: number })[];
+}
+
+export interface RecommendationsProps {
+  products: ProductWithNumericPrice[];
+}
+export interface Brand {
+  id: string;
+  name: string;
+  logoUrl?: string;
+}
+
+export interface BrandsProps {
+  brands: Brand[];
+}
+
+export interface BrandCardProps {
+  brand: Brand;
+}
+
+export interface ProductCardProps {
+  product: ProductWithNumericPrice;
+}
+
+export interface CardProps {
+  href?: string;
+  children: ReactNode;
+  className?: string;
+  onClick?: () => void;
+}
+
+export interface HorizontalSliderProps {
+  children: ReactNode;
+  title: string;
+  seeAllText?: string;
+  className?: string;
+}
+
+export interface CategoryGridProps {
+  categories: (Category & { productCount: number })[];
+}
+
+export interface ProductDetailInfo {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  imageUrl: string;
+  category: {
+    id: string;
+    name: string;
+  };
+  createdAt: string;
+}

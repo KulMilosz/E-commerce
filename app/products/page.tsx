@@ -1,41 +1,48 @@
-import { Suspense } from 'react';
-import { getCategories } from '../lib/categories';
-import { getProducts } from '../services/productsService';
-import ProductsSidebar from '../components/products/ProductsSidebar';
-import ProductsGrid from '../components/products/ProductsGrid';
+import { Suspense } from "react";
+import { getCategories } from "../lib/categories";
+import { getProducts } from "../services/productsService";
+import ProductsSidebar from "../components/products/ProductsSidebar";
+import ProductsGrid from "../components/products/ProductsGrid";
+import Pagination from "../components/products/Pagination";
 
-export default async function ProductsPage({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
+type SearchParams = { [key: string]: string | string[] | undefined };
+
+export default async function ProductsPage(props: {
+  searchParams: SearchParams | Promise<SearchParams>;
 }) {
-  const categories = await getCategories();
-  
-  const categoryFilter = searchParams.category as string;
-  const minPrice = searchParams.minPrice as string;
-  const maxPrice = searchParams.maxPrice as string;
-  const sortBy = searchParams.sortBy as string || 'latest';
-  const show = searchParams.show as string || '9';
+  const sp = await props.searchParams;
 
-  const { products, pagination } = await getProducts({
-    category: categoryFilter,
-    minPrice,
-    maxPrice,
-    sortBy,
-    show: show,
-    page: 1
-  });
+  const category = (sp.category as string) || undefined;
+  const minPrice = (sp.minPrice as string) || undefined;
+  const maxPrice = (sp.maxPrice as string) || undefined;
+  const sortBy = (sp.sortBy as string) || "latest";
+  const show = (sp.show as string) || "9";
+
+  const parsedPage = Number.parseInt((sp.page as string) ?? "", 10);
+  const page = Number.isNaN(parsedPage) ? 1 : parsedPage;
+
+  const [categories, { products, pagination }] = await Promise.all([
+    getCategories(),
+    getProducts({ category, minPrice, maxPrice, sortBy, show, page }),
+  ]);
+
+  // -------------------------
+  // Tworzymy baseUrl z searchParams
+  // -------------------------
+  const urlParams = new URLSearchParams(sp as Record<string, string>);
+  urlParams.delete("page"); // usuń obecny parametr strony, bo Pagination dopisze nowy
+  const baseUrl = `/products?${urlParams.toString()}`;
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] text-white">
+    <div className="min-h-screen bg-[#1a1a1a] text-white mt-10">
       <div className="container mx-auto px-8 py-8">
         <div className="border-t border-[#383B42] -mx-8 mb-10"></div>
         <div className="flex gap-8">
           <aside className="w-80 flex-shrink-0">
             <Suspense fallback={<div>Loading filters...</div>}>
-              <ProductsSidebar 
+              <ProductsSidebar
                 categories={categories}
-                currentCategory={categoryFilter}
+                currentCategory={category}
                 minPrice={minPrice}
                 maxPrice={maxPrice}
               />
@@ -48,6 +55,11 @@ export default async function ProductsPage({
             <Suspense fallback={<div>Loading products...</div>}>
               <ProductsGrid products={products} />
             </Suspense>
+            <Pagination
+              currentPage={pagination.page}
+              totalPages={pagination.totalPages}
+              baseUrl={baseUrl}
+            />
           </main>
         </div>
       </div>

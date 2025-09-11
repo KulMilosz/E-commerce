@@ -1,23 +1,20 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Category } from "../../generated/prisma";
-
-interface CategoryGridProps {
-  categories: (Category & { productCount: number })[];
-}
+import { CategoryGridProps } from "@/app/types";
 
 const CategoryGrid = ({ categories }: CategoryGridProps) => {
   const getCategoryIcon = (categoryName: string) => {
     const iconMap: { [key: string]: string } = {
       Mouse: "/mouse.svg",
-      Monitor: "/monitor.svg", 
+      Monitor: "/monitor.svg",
       Headphone: "/headphone.svg",
       Keyboard: "/keyboard.svg",
       Webcam: "/webcam.svg",
     };
-    
+
     return iconMap[categoryName] || "/mouse.svg";
   };
 
@@ -34,24 +31,26 @@ const CategoryGrid = ({ categories }: CategoryGridProps) => {
 
   return (
     <div className="w-full max-w-[1360px] mx-auto">
-      <h2 className="text-white text-2xl font-bold mb-8">Category</h2>
-      
+      <h2 className="text-heading-m-4 font-medium mb-8">Category</h2>
+
       <div className="flex justify-between w-full max-w-[1360px] h-48">
         {categories.map((category) => (
           <Link
             key={category.id}
-            href={`/products?category=${category.name.toLowerCase()}`}
-            className="group bg-[#222327] border border-[#383B42] rounded-md hover:border-[#F29145] transition-colors duration-300 w-[220px] h-[190px] flex items-center justify-center"
+            href={`/products?category=${category.id}`}
+            className="group bg-[#222327] border border-[#383B42] rounded-md hover:border-[#F29145] transition-colors duration-300 w-55 h-48 flex items-center justify-center"
           >
             <div className="flex flex-col items-center gap-6 text-center">
               <div className="w-16 h-16 flex items-center justify-center">
-                <img
+                <Image
                   src={getCategoryIcon(category.name)}
-                  alt={`${category.name} icon`}
-                  className="w-full h-full object-contain"
+                  alt={category.name}
+                  width={80}
+                  height={80}
+                  className="object-cover w-full h-full"
                 />
               </div>
-              <span className="text-white text-sm font-medium group-hover:text-[#F29145] transition-colors duration-300">
+              <span className="text-heading-m-6 font-medium group-hover:text-[#F29145] transition-colors duration-300">
                 {category.name}
               </span>
             </div>

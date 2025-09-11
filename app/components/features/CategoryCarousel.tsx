@@ -2,11 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Category } from "../../generated/prisma";
-
-interface CategoryCarouselProps {
-  categories: (Category & { productCount: number })[];
-}
+import Image from "next/image";
+import { CategoryCarouselProps } from "@/app/types";
 
 const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,7 +13,9 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + categories.length) % categories.length);
+    setCurrentIndex(
+      (prev) => (prev - 1 + categories.length) % categories.length
+    );
   };
 
   const goToSlide = (index: number) => {
@@ -41,40 +40,48 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
       <div className="relative bg-[#222327] rounded-md border border-[#383B42] overflow-hidden h-96 md:h-[500px]">
         <div className="flex flex-col md:flex-row h-full">
           <div className="flex-1 px-4 md:pl-32 md:pr-12 py-8 md:pt-32 md:pb-20 flex flex-col justify-center">
-            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6">
+            <h2 className=" md:text-4xl text-heading-w-4 font-medium mb-4 md:mb-6 text-[#E7E7E7]">
               {currentCategory.name}
             </h2>
-            <p className="text-white text-sm md:text-lg mb-6 md:mb-8 leading-relaxed">
+            <p className=" text-text-m md:text-lg mb-6 md:mb-8 leading-relaxed font-normal text-[#E7E7E7]">
               {currentCategory.exploreInfo}
             </p>
             <Link
-              href={`/products?category=${currentCategory.name.toLowerCase()}`}
+              href={`/products?category=${currentCategory.id}`}
               className="inline-flex bg-[#222327] border border-[#F29145] text-[#F29145] hover:bg-[#F29145] hover:text-black w-full sm:w-52 h-12 sm:h-14 rounded-md transition-colors duration-300 self-start items-center justify-center gap-3.5 font-medium text-sm sm:text-base py-3 sm:py-3.5 px-4 sm:px-5"
             >
-              <span>Explore Category</span>
-              <img 
-                src="/arrow-right.svg" 
-                alt="arrow right" 
-                width="24" 
-                height="24"
+              <span className="text-text-m font-medium whitespace-nowrap">
+                Explore Category
+              </span>
+              <Image
+                src="/arrow-right.svg"
+                alt="arrow right"
+                width={24}
+                height={24}
                 className="opacity-100"
               />
             </Link>
           </div>
 
-          <div className="flex-1 relative bg-transparent flex items-center justify-center" style={{ height: '500px' }}>
+          <div
+            className="flex-1 relative bg-transparent flex items-center justify-center"
+            style={{ height: "500px" }}
+          >
             {currentCategory.image ? (
-              <img
+              <Image
                 src={currentCategory.image}
                 alt={currentCategory.name}
-                className="w-full h-full object-cover"
+                width={currentCategory.name === "Mouse" ? 450 : 800}
+                height={currentCategory.name === "Mouse" ? 800 : 500}
+                className="w-full h-full"
                 style={{
-                  width: currentCategory.name === 'Mouse' ? '450px' : '100%',
-                  height: currentCategory.name === 'Mouse' ? '800px' : '100%',
-                  transform: currentCategory.name === 'Mouse' ? 'rotate(-34.55deg) translateY(-60px)' : 'none',
-                  opacity: currentCategory.name === 'Mouse' ? 1 : 1,
-                  objectFit: currentCategory.name === 'Mouse' ? 'contain' : 'cover',
-                  background: 'transparent'
+                  transform:
+                    currentCategory.name === "Mouse"
+                      ? "rotate(-34.55deg) translateY(-60px)"
+                      : "none",
+                  objectFit:
+                    currentCategory.name === "Mouse" ? "contain" : "cover",
+                  background: "transparent",
                 }}
               />
             ) : (
@@ -91,16 +98,26 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
           onClick={prevSlide}
           className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#F29145] hover:bg-orange-600 text-black transition-colors duration-300 cursor-pointer"
           style={{
-            width: '44px',
-            height: '74px',
-            padding: '4px 7px',
-            borderTopRightRadius: '6px',
-            borderBottomRightRadius: '6px'
+            width: "44px",
+            height: "74px",
+            padding: "4px 7px",
+            borderTopRightRadius: "6px",
+            borderBottomRightRadius: "6px",
           }}
           aria-label="Previous category"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </button>
 
@@ -108,16 +125,26 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
           onClick={nextSlide}
           className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#F29145] hover:bg-orange-600 text-black transition-colors duration-300 cursor-pointer"
           style={{
-            width: '44px',
-            height: '74px',
-            padding: '4px 7px',
-            borderTopLeftRadius: '6px',
-            borderBottomLeftRadius: '6px'
+            width: "44px",
+            height: "74px",
+            padding: "4px 7px",
+            borderTopLeftRadius: "6px",
+            borderBottomLeftRadius: "6px",
           }}
           aria-label="Next category"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </button>
       </div>
@@ -127,7 +154,7 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+            className={`w-3 h-3 rounded-full transition-colors duration-300 cursor-pointer ${
               index === currentIndex ? "bg-[#F29145]" : "bg-gray-600"
             }`}
             aria-label={`Go to slide ${index + 1}`}
