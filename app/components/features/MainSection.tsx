@@ -7,14 +7,12 @@ import { getCategories } from "../../services/categoriesService";
 import { ProductWithNumericPrice } from "../../types";
 
 const MainSection = async () => {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   const [categories, productsResponse, brandsResponse] = await Promise.all([
     getCategories(),
-    fetch("http://localhost:3000/api/products/random", {
-      cache: "no-store",
-    }),
-    fetch("http://localhost:3000/api/brands", {
-      cache: "no-store",
-    }),
+    fetch(`${API_URL}/products/random`, { cache: "no-store" }),
+    fetch(`${API_URL}/brands`, { cache: "no-store" }),
   ]);
 
   const productsData = await productsResponse.json();

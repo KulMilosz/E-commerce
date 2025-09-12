@@ -124,3 +124,9 @@ export interface ProductDetailInfo {
   };
   createdAt: string;
 }
+
+export interface QuantitySelectorProps {
+  price: number;
+  stock: number;
+  onChange?: (quantity: number, total: number) => void;
+}

@@ -10,7 +10,6 @@ export default function ProductCard({ product }: ProductCardProps) {
       href={`/products/${product.id}`}
       className="group bg-[#222327] border border-[#383B42] rounded-md overflow-hidden hover:border-[#F29145] transition-colors duration-300 w-75 h-96 flex-shrink-0 flex flex-col cursor-pointer"
     >
-      {/* Obrazek */}
       <div className="p-4 pb-0 flex-1">
         <div className="relative w-full h-56 mx-auto flex items-center justify-center rounded-md overflow-hidden bg-white">
           <button
@@ -53,9 +52,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      {/* Tekst (wyrównany do lewej jak obrazek) */}
       <div className="px-4 pt-4 pb-5 flex flex-col">
-        {/* Kategoria + logo */}
         <div className="flex items-center justify-between mb-2">
           <div className="inline-block bg-[#E5610A] text-white text-text-s font-medium px-2.5 py-1.5 rounded-md w-fit">
             {product.category?.name || "Unknown"}
@@ -79,12 +76,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        {/* Nazwa produktu */}
         <h3 className="text-white text-text-l line-clamp-2 mb-2">
           {product.name}
         </h3>
 
-        {/* Cena */}
         <div className="text-heading-m-5 font-semibold">
           ${product.price.toFixed(2)}
         </div>

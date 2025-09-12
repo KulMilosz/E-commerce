@@ -1,29 +1,11 @@
 import { notFound } from "next/navigation";
+import { getProduct } from "@/app/services/singleProductService";
+import ProductDescription from "@/app/components/products/ProductDescription";
+import { getRandomDeliveryDateRange } from "@/app/lib/date";
 import Image from "next/image";
-import Link from "next/link";
-import { ProductDetailInfo } from "@/app/types";
-
-async function getProduct(id: string): Promise<ProductDetailInfo | null> {
-  try {
-    const response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-      }/api/products/${id}`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    return null;
-  }
-}
+import Breadcrumb from "@/app/components/layout/Breadcrumb";
+import ProductColors from "@/app/components/products/ProductColors";
+import QuantitySelector from "@/app/components/products/QuantitySelector";
 
 export default async function ProductDetailPage({
   params,
@@ -31,75 +13,83 @@ export default async function ProductDetailPage({
   params: { id: string };
 }) {
   const product = await getProduct(params.id);
+  console.log(product);
 
   if (!product) {
     notFound();
   }
 
+  const deliveryDate = getRandomDeliveryDateRange();
+  console.log(deliveryDate);
+
   return (
-    <div className="min-h-screen bg-[#1a1a1a] text-white">
-      <div className="container mx-auto px-8 py-8">
-        <div className="border-t border-[#383B42] -mx-8 mb-10"></div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="space-y-6">
-            <div className="relative bg-white rounded-md overflow-hidden aspect-square">
-              {product.imageUrl ? (
-                <Image
-                  src={product.imageUrl}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full text-gray-400">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">📱</div>
-                    <div className="text-lg">No image available</div>
-                  </div>
+    <>
+      <div className="mb-5 ml-10 mt-10">
+        <Breadcrumb productName={product.name} />
+      </div>
+      <div className="flex p-10 space-x-8">
+        <div className="flex w-220 h-140 space-x-10">
+          <div className="w-full h-full bg-blue-300"></div>
+          <div className="w-full h-full">
+            <div className="flex flex-col justify-between h-full">
+              <div className="flex flex-col ">
+                <p className="text-heading-w-5 font-medium">{product.name}</p>
+                <div className="inline-block bg-[#E5610A] text-white text-text-s font-medium px-2.5 py-1.5 rounded-md w-fit mt-5">
+                  <p className="text-text-s font-medium">
+                    {product.category.name}
+                  </p>
                 </div>
-              )}
-            </div>
-          </div>
-
-          <div className="space-y-8">
-            <div>
-              <div className="inline-block bg-[#E5610A] text-white text-sm px-3 py-1.5 rounded-md mb-4">
-                {product.category.name}
-              </div>
-              <h1 className="text-3xl font-bold text-white mb-4">
-                {product.name}
-              </h1>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                {product.description}
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="text-4xl font-bold text-[#F29145]">
-                ${product.price.toFixed(2)}
+                <div className="mt-8">
+                  <p className="text-heading-w-4 font-medium">
+                    ${product.price}
+                  </p>
+                </div>
               </div>
 
-              <div className="text-sm text-gray-400">
-                Stock: {product.stock} available
+              <div className="mb-8 mt-8">
+                <ProductDescription description={product.description} />
               </div>
-            </div>
+              <div>
+                <span className="text-[#B0B0B0] text-text-l font-medium">
+                  Shipping Available
+                </span>
+                <div className="flex flex-col w-80 h-22 border-2 rounded-2xl mt-5 justify-center items-center gap-2">
+                  <div className="flex ">
+                    <Image
+                      src="/shield-cross.svg"
+                      alt="Shield Icon"
+                      width={24}
+                      height={24}
+                    />
+                    <span className="text-text-m font-medium">
+                      NexusHub Courier
+                    </span>
+                  </div>
 
-            <div className="space-y-4">
-              <button className="w-full bg-[#F29145] hover:bg-orange-600 text-black font-medium py-4 px-6 rounded-md transition-colors duration-300">
-                Add to Cart
-              </button>
-
-              <Link
-                href={`/products?category=${product.category.id}`}
-                className="block w-full text-center border border-[#F29145] text-[#F29145] hover:bg-[#F29145] hover:text-black font-medium py-4 px-6 rounded-md transition-colors duration-300"
-              >
-                View Similar Products
-              </Link>
+                  <span className="text-text-m font-regular">
+                    Estimated arrival {deliveryDate}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        <div className="flex-1 flex justify-center">
+          <div className="w-105 h-110 bg-[#262626] border-[#383B42] border-2 rounded-xl">
+            <div className="flex flex-col ml-6 mt-6 space-y-4 ">
+              <span className="text-[#B0B0B0] text-text-l font-medium">
+                Colors
+              </span>
+              <ProductColors />
+            </div>
+            <div className="flex flex-col ml-6 mt-6 space-y-4 ">
+              <QuantitySelector price={product.price} stock={product.stock} />
+            </div>
+            <div></div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
