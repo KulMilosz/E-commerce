@@ -4,6 +4,7 @@ Final project developed as part of the course.
 The goal is to create a **functional online store** using **Next.js** and the provided [Figma design]
 
 ## 🎯 Project Objectives
+
 - Build an online store matching the Figma design.
 - Implement key e-commerce features.
 - Gain hands-on experience with Next.js, React, Tailwind CSS, and API/Payment integrations.
@@ -11,6 +12,7 @@ The goal is to create a **functional online store** using **Next.js** and the pr
 ---
 
 ## ⚙️ Tech Stack
+
 - Next.js 15 (App Router)
 - React 19
 - Tailwind CSS
@@ -22,23 +24,6 @@ The goal is to create a **functional online store** using **Next.js** and the pr
 - Payment integration
 
 ---
-
-## 🚀 Backend Status: ✅ COMPLETED
-
-### ✅ What's Done:
-- **Database Setup**: PostgreSQL with Docker
-- **Prisma ORM**: Schema definition and migrations
-- **API Endpoints**: 
-  - `GET /api/categories` - List all categories
-  - `GET /api/products` - List products with pagination, filtering, search
-  - `GET /api/products/[id]` - Get product details
-  - `GET /api/user/[id]` - Get user data
-- **Database Seeding**: 5 categories, 25 products (5 per category)
-- **Data Models**: User, Category, Product, Order, OrderItem
-- **Environment Setup**: Docker Compose, Prisma Studio, Database scripts
-
----
-
 
 ## 📂 Project Structure
 
@@ -65,11 +50,13 @@ docker-compose.yml       # PostgreSQL container setup
 ## 🛠️ Development Setup
 
 ### Prerequisites:
+
 - Node.js 18+
 - Docker Desktop
 - Git
 
 ### Installation:
+
 ```bash
 # Clone repository
 git clone <repository-url>
@@ -90,6 +77,7 @@ npm run dev
 ```
 
 ### Available Scripts:
+
 - `npm run dev` - Start Next.js development server
 - `npm run db:up` - Start PostgreSQL container
 - `npm run db:down` - Stop PostgreSQL container
@@ -102,6 +90,7 @@ npm run dev
 ---
 
 ## ✅ Functional Requirements
+
 - ✅ **Backend API** - Complete with database integration
 - ⏳ Product listing page
 - ⏳ Product detail page
@@ -114,9 +103,11 @@ npm run dev
 ---
 
 ## 👤 Author
+
 Name / KulMilosz
 
 ---
 
 ## 📜 License
+
 This project was created for educational purposes (course final project).
