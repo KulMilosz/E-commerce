@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function ProductColors() {
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>("white");
 
   const colors = [
     { name: "white", bg: "#FCFCFC", checkColor: "black" },
@@ -22,7 +22,7 @@ export default function ProductColors() {
             className={`relative w-15 h-15 border-2 rounded-xl cursor-pointer flex items-center justify-center`}
             style={{
               backgroundColor: color.bg,
-              borderColor: isSelected ? "#F29145" : "#383B42",
+              borderColor: "#383B42",
             }}
           >
             {isSelected && (

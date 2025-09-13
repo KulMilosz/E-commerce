@@ -129,4 +129,9 @@ export interface QuantitySelectorProps {
   price: number;
   stock: number;
   onChange?: (quantity: number, total: number) => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface CartButtonProps {
+  color?: string;
 }

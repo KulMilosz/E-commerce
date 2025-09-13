@@ -85,7 +85,7 @@ async function main() {
     data: {
       name: "Headphone",
       description: "Audio headphones and headsets",
-      image: "https://via.placeholder.com/300x300",
+      image: "https://i.ibb.co/4RFR2QBQ/Image.png",
       exploreInfo: "Premium audio experience for music and gaming",
     },
   });
@@ -94,7 +94,7 @@ async function main() {
     data: {
       name: "Keyboard",
       description: "Computer keyboards and input devices",
-      image: "https://via.placeholder.com/300x300",
+      image: "https://i.ibb.co/4RFR2QBQ/Image.png",
       exploreInfo: "Mechanical and membrane keyboards for every need",
     },
   });
@@ -103,7 +103,7 @@ async function main() {
     data: {
       name: "Webcam",
       description: "Web cameras and video conferencing devices",
-      image: "https://via.placeholder.com/300x300",
+      image: "https://i.ibb.co/4RFR2QBQ/Image.png",
       exploreInfo: "HD webcams for streaming and video calls",
     },
   });
@@ -117,7 +117,7 @@ async function main() {
         "Ergonomic wireless mouse designed for all-day comfort and precision. Features a high-accuracy sensor that tracks on most surfaces, whisper-quiet buttons, and an ultra-fast electromagnetic scroll wheel for pixel-by-pixel control or rapid scrolling. Seamlessly pair with multiple devices, customize buttons for your favorite apps, and keep going with USB-C quick charging and long battery life.",
       price: 99.99,
       stock: 25,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[1].id,
     },
     {
@@ -126,7 +126,7 @@ async function main() {
         "Esports-ready gaming mouse with a 30,000 DPI optical sensor for surgical accuracy and consistent tracking at high speeds. Its refined ergonomic shell reduces fatigue during long sessions, while durable optical switches deliver crisp, double-click-free actuation. PTFE feet and a flexible, drag-reducing cable ensure effortless glide, and onboard memory keeps your custom DPI stages and bindings ready wherever you play.",
       price: 69.99,
       stock: 30,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[4].id,
     },
     {
@@ -135,7 +135,7 @@ async function main() {
         "Ultra-light wireless gaming mouse engineered for speed, control, and comfort. A responsive sensor paired with low-latency wireless keeps your aim sharp, while the balanced shape and textured sides provide a confident grip. Customize lighting, DPI, and macros with intuitive software, and go the distance with efficient power management and USB-C fast charging.",
       price: 79.99,
       stock: 20,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[5].id,
     },
     {
@@ -144,7 +144,7 @@ async function main() {
         "Premium gaming mouse featuring a 36,000 DPI sensor, crisp switches, and finely tuned click consistency for competitive play. The sculpted right-handed shape offers excellent support, while PTFE feet and a flexible paracord-style cable deliver smooth, snag-free movement. Customize RGB, DPI, and button mapping, and store profiles onboard for tournaments and travel.",
       price: 79.99,
       stock: 15,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[0].id,
     },
     {
@@ -153,7 +153,7 @@ async function main() {
         "Ultra-lightweight wireless mouse built for elite competitive performance. Its high-efficiency sensor delivers precise tracking and reliable flick control, while large PTFE feet provide exceptionally smooth glide. The symmetrical shape suits a wide range of grips, and the low-latency wireless connection plus long battery life keep you focused during marathon sessions.",
       price: 39.99,
       stock: 40,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[1].id,
     },
   ];
@@ -174,7 +174,7 @@ async function main() {
         "27-inch 4K UHD display that renders razor-sharp text and lifelike visuals with 99% sRGB coverage. Ideal for creative work and entertainment, it offers wide viewing angles, slim bezels for multi-monitor setups, and eye-care features to reduce strain. Multiple input options and ergonomic adjustments help you build a tidy, comfortable workspace.",
       price: 399.99,
       stock: 15,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[3].id,
     },
     {
@@ -183,7 +183,7 @@ async function main() {
         "24-inch gaming monitor tuned for speed with a 144 Hz refresh rate and 1 ms response time for fluid motion and crisp clarity. Adaptive-sync support helps eliminate tearing and stutter, while a vibrant panel and game-ready presets make it easy to dial in your preferred look. The compact size keeps all action within your field of view for focused competitive play.",
       price: 249.99,
       stock: 20,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[0].id,
     },
     {
@@ -192,7 +192,7 @@ async function main() {
         "Immersive 34-inch curved ultrawide that expands your field of view for gaming, content creation, and multitasking. The extra horizontal space makes room for side-by-side windows, timelines, and tool palettes, while adaptive-sync support and fast response keep motion smooth. A clean design, versatile connectivity, and a comfortable stand round out the setup.",
       price: 499.99,
       stock: 12,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[3].id,
     },
     {
@@ -201,7 +201,7 @@ async function main() {
         "Large 32-inch QHD gaming display with a blistering 240 Hz refresh rate for ultra-smooth, responsive gameplay. Enhanced contrast and vivid color bring scenes to life, and adaptive-sync helps maintain tear-free performance. With a sturdy, adjustable stand and rich connectivity, it is a strong centerpiece for high-end rigs.",
       price: 599.99,
       stock: 8,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[0].id,
     },
     {
@@ -210,7 +210,7 @@ async function main() {
         "Professional-grade 27-inch 5K monitor delivering exceptional detail and color accuracy for photo, video, and design workflows. Factory-tuned color, wide gamut coverage, and uniform brightness help ensure reliable results, while the high pixel density keeps UI elements and text incredibly crisp. Built-in ergonomics and modern I/O simplify daily use in demanding studios.",
       price: 1599.99,
       stock: 5,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[3].id,
     },
   ];
@@ -231,7 +231,7 @@ async function main() {
         "Wireless over-ear headphones that combine powerful, balanced sound with effective noise cancelling to keep you in the zone. Enjoy long listening sessions thanks to cushioned earcups and an extended battery life, and stay aware when needed with ambient modes. Multipoint Bluetooth, quick charging, and intuitive onboard controls make them effortless for everyday use.",
       price: 399.99,
       stock: 25,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[2].id,
     },
     {
@@ -240,7 +240,7 @@ async function main() {
         "Gaming headset engineered for immersion with active noise cancellation and richly detailed audio that highlights footsteps, voices, and effects. A clear boom mic keeps team comms sharp, while 2.4 GHz wireless and Bluetooth offer flexible connectivity across devices. Plush memory-foam padding and customizable lighting complete the premium setup.",
       price: 329.99,
       stock: 20,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[2].id,
     },
     {
@@ -249,7 +249,7 @@ async function main() {
         "Wireless esports headset delivering clear, powerful sound and excellent mic intelligibility over a low-latency 2.4 GHz link. Lightweight construction, breathable memory-foam cushions, and a balanced clamp force provide long-wear comfort. Tunable EQ, game-ready spatial audio, and a detachable noise-cancelling mic keep you locked in on every callout.",
       price: 149.99,
       stock: 30,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[4].id,
     },
     {
@@ -258,7 +258,7 @@ async function main() {
         "Compact, foldable wireless headphones with active noise cancellation to reduce distractions at home, in the office, or on the go. The lively sound signature brings music and movies to life, while a long-lasting battery and quick charging keep you powered through busy days. Built-in controls and a comfortable fit make daily listening simple.",
       price: 149.99,
       stock: 35,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[2].id,
     },
     {
@@ -267,7 +267,7 @@ async function main() {
         "High-fidelity gaming headset designed for clear positional cues and punchy, detailed audio. Lightweight construction and soft ear cushions reduce fatigue, while a noise-filtering microphone ensures your voice cuts through the action. Customizable RGB and USB-C connectivity make it a versatile choice for PC, console, and portable use.",
       price: 99.99,
       stock: 40,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[0].id,
     },
   ];
@@ -288,7 +288,7 @@ async function main() {
         "Compact 84-key wireless mechanical keyboard that balances desk space, portability, and full-size functionality. Hot-swappable sockets let you experiment with different switches, while durable keycaps and per-key lighting elevate both feel and look. Connect via low-latency wireless, Bluetooth, or USB-C, and tailor layers, macros, and effects with intuitive software.",
       price: 79.99,
       stock: 30,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[5].id,
     },
     {
@@ -297,7 +297,7 @@ async function main() {
         "Performance-focused mechanical keyboard with responsive switches, sound-dampening design, and per-key RGB lighting. The sturdy chassis resists flex, dedicated media controls keep playback at your fingertips, and on-the-fly macros simplify complex inputs. Customize profiles and lighting, then store them onboard for seamless use across setups.",
       price: 199.99,
       stock: 15,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[0].id,
     },
     {
@@ -306,7 +306,7 @@ async function main() {
         "Sleek, compact wireless keyboard crafted for comfortable, precise typing in a minimal footprint. Low-profile, softly dished keys promote natural finger alignment, while adaptive backlighting illuminates as your hands approach. Pair with up to three devices, switch instantly between them, and recharge via USB-C to keep your workflow flowing.",
       price: 99.99,
       stock: 25,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[1].id,
     },
     {
@@ -315,7 +315,7 @@ async function main() {
         "Flagship mechanical keyboard built for control and immersion, featuring responsive switches, dedicated macro keys, and a multifunction media dial. A cushioned wrist rest and sound-dampening materials enhance comfort and acoustics, while bright per-key RGB and underglow add dramatic flair. Advanced software unlocks powerful macros, layers, and profiles for every game or app.",
       price: 229.99,
       stock: 18,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[4].id,
     },
     {
@@ -324,7 +324,7 @@ async function main() {
         "Low-profile wireless mechanical keyboard that delivers a fast, crisp keystroke in a compact, tournament-ready form factor. The premium metal top plate feels solid, while long-lasting wireless and per-key lighting keep your setup clean without sacrificing style. Easily toggle devices and profiles to take your preferred layout anywhere.",
       price: 99.99,
       stock: 35,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[1].id,
     },
   ];
@@ -345,7 +345,7 @@ async function main() {
         "Reliable 1080p webcam that delivers sharp video, fast autofocus, and clear stereo audio for calls, streams, and classes. Automatic light correction helps you look your best in challenging environments, and wide compatibility ensures easy setup with popular apps. A sturdy mount lets you clip to a screen or position on a tripod.",
       price: 69.99,
       stock: 40,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[1].id,
     },
     {
@@ -354,7 +354,7 @@ async function main() {
         "High-performance 4K webcam with HDR and an adaptive light sensor that maintains natural-looking exposure in bright or dim scenes. Fast, accurate autofocus keeps you crisp, while a wide field of view captures more of your space when needed. Flexible mounting and software controls make fine-tuning simple for streaming or conferencing.",
       price: 199.99,
       stock: 15,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[4].id,
     },
     {
@@ -363,7 +363,7 @@ async function main() {
         "Premium creator webcam capable of detailed 4K capture with smart noise reduction and excellent low-light performance. The fast lens and clear microphone help you look and sound professional, while software controls let you dial in exposure, color, and framing. Ideal for content creation, streaming, and high-quality video calls.",
       price: 199.99,
       stock: 12,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[0].id,
     },
     {
@@ -372,7 +372,7 @@ async function main() {
         "Creator-friendly 1080p webcam with smooth, sharp video and intelligent autofocus and exposure for consistent results. Connect over USB-C, switch to portrait orientation for short-form content, and rely on dual mics for clear voice pickup. Perfect for streaming, webinars, and everyday meetings.",
       price: 79.99,
       stock: 25,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[1].id,
     },
     {
@@ -381,7 +381,7 @@ async function main() {
         "Versatile 4K webcam that combines advanced image processing with fast autofocus and detailed, vibrant video. Dual microphones reduce background noise for clearer speech, and an adjustable field of view helps you frame the shot just right. Compatible with major platforms and simple to mount on monitors or tripods.",
       price: 299.99,
       stock: 8,
-      imageUrl: "https://via.placeholder.com/300x300",
+      imageUrl: "https://i.ibb.co/4RFR2QBQ/Image.png",
       brandId: brands[5].id,
     },
   ];

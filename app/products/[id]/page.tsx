@@ -20,7 +20,6 @@ export default async function ProductDetailPage({
   }
 
   const deliveryDate = getRandomDeliveryDateRange();
-  console.log(deliveryDate);
 
   return (
     <>
@@ -29,7 +28,42 @@ export default async function ProductDetailPage({
       </div>
       <div className="flex p-10 space-x-8">
         <div className="flex w-220 h-140 space-x-10">
-          <div className="w-full h-full bg-blue-300"></div>
+          <div className=" flex flex-col w-full h-full space-y-8">
+            <div className="flex relative h-85">
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="flex size-full h-1/4 space-x-4">
+              <div className="flex relative h-full w-1/3 cursor-pointer">
+                <Image
+                  src={product.imageUrl}
+                  alt={product.name}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div className="flex relative h-full w-1/3 cursor-pointer">
+                <Image
+                  src={product.imageUrl}
+                  alt={product.name}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <div className="flex relative h-full w-1/3 cursor-pointer">
+                <Image
+                  src={product.imageUrl}
+                  alt={product.name}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </div>
           <div className="w-full h-full">
             <div className="flex flex-col justify-between h-full">
               <div className="flex flex-col ">
@@ -76,7 +110,7 @@ export default async function ProductDetailPage({
         </div>
 
         <div className="flex-1 flex justify-center">
-          <div className="w-105 h-110 bg-[#262626] border-[#383B42] border-2 rounded-xl">
+          <div className="w-105 h-fit bg-[#262626] border-[#383B42] border-2 rounded-lg">
             <div className="flex flex-col ml-6 mt-6 space-y-4 ">
               <span className="text-[#B0B0B0] text-text-l font-medium">
                 Colors
@@ -86,7 +120,6 @@ export default async function ProductDetailPage({
             <div className="flex flex-col ml-6 mt-6 space-y-4 ">
               <QuantitySelector price={product.price} stock={product.stock} />
             </div>
-            <div></div>
           </div>
         </div>
       </div>
