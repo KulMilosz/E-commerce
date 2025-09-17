@@ -26,11 +26,8 @@ export default async function ProductsPage(props: {
     getProducts({ category, minPrice, maxPrice, sortBy, show, page }),
   ]);
 
-  // -------------------------
-  // Tworzymy baseUrl z searchParams
-  // -------------------------
   const urlParams = new URLSearchParams(sp as Record<string, string>);
-  urlParams.delete("page"); // usuń obecny parametr strony, bo Pagination dopisze nowy
+  urlParams.delete("page");
   const baseUrl = `/products?${urlParams.toString()}`;
 
   return (

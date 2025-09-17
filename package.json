@@ -18,13 +18,15 @@
     "dev:full": "npm run db:up && npm run dev"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@prisma/client": "^6.15.0",
     "next": "15.5.0",
     "next-auth": "^4.24.11",
     "prisma": "^6.15.0",
     "react": "^19.1.0",
     "react-dom": "19.1.0",
-    "snippets": "^0.0.6"
+    "snippets": "^0.0.6",
+    "zod": "^4.1.9"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -17,7 +17,6 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ productName }) => {
   return (
     <nav className="text-text-m font-medium mb-4">
       <ol className="flex items-center">
-        {/* Home */}
         <li className="flex items-center">
           <Link href="/" className="hover:text-orange-400">
             Home
@@ -44,7 +43,6 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ productName }) => {
           );
         })}
 
-        {/* Ostatni element - nazwa produktu */}
         <li className="flex items-center">
           <Image
             src="/chevron-small-right.svg"
