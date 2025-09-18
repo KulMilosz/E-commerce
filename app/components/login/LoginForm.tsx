@@ -4,10 +4,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { signIn, getSession } from "next-auth/react";
 import { z } from "zod";
 import { loginSchema } from "./loginValidation";
-
-// Schemat Zod
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -23,31 +22,60 @@ const LoginForm: React.FC = () => {
     formState: { errors },
     reset,
   } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
     mode: "onSubmit",
   });
 
   const handleEmailSubmit = (data: LoginFormData) => {
+    if (!data.emailOrMobile) {
+      setErrorMessage("Please enter your email or mobile.");
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{9,15}$/;
+    if (!emailRegex.test(data.emailOrMobile) && !phoneRegex.test(data.emailOrMobile)) {
+      setErrorMessage("Email or Phone Number is not valid.");
+      return;
+    }
+
     setErrorMessage(null);
     setEmailOrMobile(data.emailOrMobile);
     setStep("password");
-    reset({ emailOrMobile: data.emailOrMobile });
+    reset({ emailOrMobile: data.emailOrMobile, password: "" });
   };
 
   const handlePasswordSubmit = async (data: LoginFormData) => {
     setErrorMessage(null);
 
-    // Tu normalnie wysyłasz do API i sprawdzasz dane
-    const isValidUser = true; // <- przykładowo, bez backendu
-    if (!isValidUser) {
-      setErrorMessage("Email/Phone Number or Password Incorrect");
-      setStep("email");
-      reset();
+    if (!data.password) {
+      setErrorMessage("Please enter your password.");
       return;
     }
 
-    // Jeśli wszystko OK
-    router.push("/dashboard"); // np. po zalogowaniu
+    try {
+      const result = await signIn("credentials", {
+        emailOrMobile: emailOrMobile,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setErrorMessage("Email/Phone Number or Password Incorrect");
+        setStep("email");
+        reset();
+        return;
+      }
+
+      if (result?.ok) {
+        router.push("/");
+        router.refresh();
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setErrorMessage("Network error. Please try again.");
+      setStep("email");
+      reset();
+    }
   };
 
   const inputClass = (field: keyof LoginFormData) =>
@@ -89,21 +117,24 @@ const LoginForm: React.FC = () => {
         )}
 
         {step === "password" && (
-          <div>
-            <label className="block text-text-l font-medium mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              {...register("password")}
-              className={inputClass("password")}
-            />
-            {errors.password && (
-              <span className="text-red-500 text-sm">
-                {errors.password.message}
-              </span>
-            )}
-          </div>
+          <>
+            <input type="hidden" {...register("emailOrMobile")} value={emailOrMobile} />
+            <div>
+              <label className="block text-text-l font-medium mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                {...register("password")}
+                className={inputClass("password")}
+              />
+              {errors.password && (
+                <span className="text-red-500 text-sm">
+                  {errors.password.message}
+                </span>
+              )}
+            </div>
+          </>
         )}
 
         {errorMessage && (
@@ -117,6 +148,16 @@ const LoginForm: React.FC = () => {
           {step === "email" ? "Continue" : "Sign In"}
         </button>
       </form>
+
+      <div className="mt-4 text-center text-gray-500 text-text-m">
+        {"Don't have an account?"}{" "}
+        <button
+          onClick={() => router.push("/register")}
+          className="text-text-m font-medium text-[#F29145] cursor-pointer"
+        >
+          Sign Up
+        </button>
+      </div>
     </div>
   );
 };

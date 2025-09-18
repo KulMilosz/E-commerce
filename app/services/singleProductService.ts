@@ -4,12 +4,10 @@ export async function getProduct(
   id: string
 ): Promise<ProductDetailInfo | null> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/products/${id}`,
-      {
-        cache: "no-store",
-      }
-    );
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/products/${id}`, {
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       return null;

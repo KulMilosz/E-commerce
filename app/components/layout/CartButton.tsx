@@ -1,3 +1,6 @@
+"use client";
+
+import React from "react";
 import Image from "next/image";
 
 const CartButton = () => {
@@ -15,3 +18,4 @@ const CartButton = () => {
 };
 
 export default CartButton;
+

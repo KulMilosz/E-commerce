@@ -6,7 +6,7 @@ export const registerSchema = z
     mobile: z
       .string()
       .min(1, "Please enter your phone number.")
-      .regex(/^[0-9]{9,15}$/, "Please enter a valid phone number."),
+      .regex(/^[0-9]{9}$/, "Please enter a valid 9-digit phone number."),
     password: z
       .string()
       .min(8, "Password must be at least 8 characters.")
@@ -31,7 +31,7 @@ export const loginSchema = z.object({
     .min(1, "Please enter your email or mobile.")
     .refine((val) => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const phoneRegex = /^[0-9]{9,15}$/;
+      const phoneRegex = /^[0-9]{9}$/;
       return emailRegex.test(val) || phoneRegex.test(val);
     }, "Email or Phone Number is not valid."),
   password: z.string().min(1, "Please enter your password."),

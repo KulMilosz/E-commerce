@@ -7,7 +7,6 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
 
-    // Parsowanie parametrów zapytania
     const page = parseInt(searchParams.get("page") || "1", 10);
     const limit = parseInt(
       searchParams.get("limit") || searchParams.get("show") || "10",
@@ -18,14 +17,12 @@ export async function GET(request: NextRequest) {
     const maxPrice = searchParams.get("maxPrice");
     const sortBy = searchParams.get("sortBy") || "latest";
 
-    // Tworzymy obiekt filtrów dla Prisma.ProductWhereInput
     const where: Prisma.ProductWhereInput = {};
 
     if (category && category !== "all") {
       where.categoryId = category;
     }
 
-    // Poprawione filtrowanie cen, bez użycia FloatFilter
     if (minPrice || maxPrice) {
       where.price = {};
       if (minPrice) where.price.gte = parseFloat(minPrice);
@@ -34,7 +31,6 @@ export async function GET(request: NextRequest) {
 
     const skip = (page - 1) * limit;
 
-    // Pobranie produktów i liczby produktów równolegle
     const [products, total] = await Promise.all([
       prisma.product.findMany({
         where,
@@ -64,7 +60,6 @@ export async function GET(request: NextRequest) {
 
     const totalPages = Math.ceil(total / limit);
 
-    // Mapowanie produktów na czytelny format
     const formattedProducts = products.map((product) => ({
       id: product.id,
       name: product.name,

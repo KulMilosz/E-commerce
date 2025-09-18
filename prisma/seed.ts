@@ -399,6 +399,7 @@ async function main() {
     data: {
       firstName: "John",
       email: "john.doe@example.com",
+      mobile: "123456789",
       passwordHash: "hashed_password_123",
     },
   });
@@ -407,6 +408,7 @@ async function main() {
     data: {
       firstName: "Jane",
       email: "jane.smith@example.com",
+      mobile: "987654321",
       passwordHash: "hashed_password_456",
     },
   });

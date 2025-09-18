@@ -9,7 +9,6 @@ const config: Config = {
   theme: {
     extend: {
       fontSize: {
-        // Website Headings
         "display-1": ["64px", { lineHeight: "76px", letterSpacing: "-0.01em" }],
         "display-2": ["56px", { lineHeight: "66px", letterSpacing: "-0.01em" }],
         "display-3": ["48px", { lineHeight: "58px", letterSpacing: "-0.01em" }],
@@ -42,7 +41,6 @@ const config: Config = {
           { lineHeight: "30px", letterSpacing: "-0.01em" },
         ],
 
-        // Mobile Headings
         "heading-m-1": [
           "40px",
           { lineHeight: "50px", letterSpacing: "-0.01em" },
@@ -72,7 +70,6 @@ const config: Config = {
           { lineHeight: "28px", letterSpacing: "-0.01em" },
         ],
 
-        // Paragraphs
         "text-l": ["18px", { lineHeight: "28px", letterSpacing: "0" }],
         "text-m": ["16px", { lineHeight: "26px", letterSpacing: "0" }],
         "text-s": ["14px", { lineHeight: "24px", letterSpacing: "0" }],

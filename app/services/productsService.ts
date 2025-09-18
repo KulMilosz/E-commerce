@@ -1,7 +1,5 @@
 import { ProductFilters, ProductsResponse } from "../types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 export async function getProducts(
   filters: ProductFilters = {}
 ): Promise<ProductsResponse> {
@@ -15,7 +13,8 @@ export async function getProducts(
   if (filters.maxPrice) params.append("maxPrice", filters.maxPrice);
   if (filters.sortBy) params.append("sortBy", filters.sortBy);
 
-  const response = await fetch(`${API_URL}/products?${params.toString()}`);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const response = await fetch(`${baseUrl}/api/products?${params.toString()}`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch products");

@@ -30,7 +30,7 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -63,9 +63,9 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
   return (
     <div className="w-full h-full p-6 bg-[#262626] border-[#383B42] border-2 rounded-lg text-text-m flex flex-col">
       <h2 className="mb-6 text-heading-w-6 font-medium">Create Account</h2>
-      <div className="border-t border-[#383B42] mr-6 ml-6 mt-5 mb-8"></div>
+      <div className={`border-t border-[#383B42] mr-6 ml-6 mt-5 ${errorMessage ? 'mb-2' : 'mb-8'}`}></div>
 
-      {errorMessage && <div className="mb-4 text-red-600">{errorMessage}</div>}
+      {errorMessage && <div className="mb-2 text-red-600">{errorMessage}</div>}
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -183,7 +183,7 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
           onClick={() => router.push("/login")}
           className="text-text-m font-medium text-[#F29145] cursor-pointer"
         >
-          Log In
+          Sign In
         </button>
       </div>
     </div>

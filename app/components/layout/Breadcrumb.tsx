@@ -12,7 +12,7 @@ interface BreadcrumbProps {
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ productName }) => {
   const pathname = usePathname();
   const pathParts = pathname.split("/").filter(Boolean);
-  const displayParts = pathParts.slice(0, -1); // usuwamy ostatni element (ID)
+  const displayParts = pathParts.slice(0, -1);
 
   return (
     <nav className="text-text-m font-medium mb-4">

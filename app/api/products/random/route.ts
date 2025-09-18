@@ -21,7 +21,6 @@ export async function GET() {
       },
     });
 
-    // Losowo sortuj i weź pierwsze 6 produktów
     const shuffled = allProducts.sort(() => 0.5 - Math.random());
     const randomProducts = shuffled.slice(0, 6).map((product) => ({
       ...product,
