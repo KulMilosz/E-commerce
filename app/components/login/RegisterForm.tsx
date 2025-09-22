@@ -40,7 +40,8 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
       if (!res.ok) {
         setErrorMessage(result.message || "Błąd rejestracji");
       } else {
-        router.push("/login");
+        document.cookie = "registered=true; path=/; max-age=5";
+        router.push("/register-success");
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -63,7 +64,11 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
   return (
     <div className="w-full h-full p-6 bg-[#262626] border-[#383B42] border-2 rounded-lg text-text-m flex flex-col">
       <h2 className="mb-6 text-heading-w-6 font-medium">Create Account</h2>
-      <div className={`border-t border-[#383B42] mr-6 ml-6 mt-5 ${errorMessage ? 'mb-2' : 'mb-8'}`}></div>
+      <div
+        className={`border-t border-[#383B42] mr-6 ml-6 mt-5 ${
+          errorMessage ? "mb-2" : "mb-8"
+        }`}
+      ></div>
 
       {errorMessage && <div className="mb-2 text-red-600">{errorMessage}</div>}
 
@@ -130,14 +135,22 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
         </div>
 
         <div>
-          <label className="block mb-2 text-text-l font-medium">
+          <label className="block mb-4 text-text-l font-medium">
             Country / Region
           </label>
-          <input
-            type="text"
+          <select
             {...register("country")}
-            className={inputClass("country")}
-          />
+            className={`${inputClass("country")} bg-[#262626] h-13`}
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select country
+            </option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="Poland">Poland</option>
+            <option value="Germany">Germany</option>
+          </select>
+
           {errors.country && (
             <span className="text-red-500 text-sm">
               {errors.country.message}

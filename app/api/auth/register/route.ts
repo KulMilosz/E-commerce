@@ -1,45 +1,46 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '../../../generated/prisma';
-import bcrypt from 'bcryptjs';
-import { registerSchema } from '../../../components/login/loginValidation';
+import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "../../../generated/prisma";
+import bcrypt from "bcryptjs";
+import { registerSchema } from "../../../components/login/loginValidation";
 
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     const validationResult = registerSchema.safeParse(body);
     if (!validationResult.success) {
       return NextResponse.json(
-        { 
-          message: 'Validation failed', 
-          errors: validationResult.error.issues 
+        {
+          message: "Validation failed",
+          errors: validationResult.error.issues,
         },
         { status: 400 }
       );
     }
 
-    const { email, mobile, password, country, acceptPolicy } = validationResult.data;
+    const { email, mobile, password, country, acceptPolicy } =
+      validationResult.data;
 
     const existingUserByEmail = await prisma.user.findUnique({
-      where: { email }
+      where: { email },
     });
 
     if (existingUserByEmail) {
       return NextResponse.json(
-        { message: 'User with this email already exists' },
+        { message: "User with this email already exists" },
         { status: 409 }
       );
     }
 
     const existingUserByMobile = await prisma.user.findUnique({
-      where: { mobile }
+      where: { mobile },
     });
 
     if (existingUserByMobile) {
       return NextResponse.json(
-        { message: 'User with this phone number already exists' },
+        { message: "User with this phone number already exists" },
         { status: 409 }
       );
     }
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest) {
       data: {
         email,
         mobile,
-        firstName: email.split('@')[0],
+        firstName: email.split("@")[0],
         passwordHash,
       },
       select: {
@@ -59,21 +60,20 @@ export async function POST(request: NextRequest) {
         email: true,
         mobile: true,
         firstName: true,
-      }
+      },
     });
 
     return NextResponse.json(
-      { 
-        message: 'User registered successfully',
-        user: newUser
+      {
+        message: "User registered successfully",
+        user: newUser,
       },
       { status: 201 }
     );
-
   } catch (error) {
-    console.error('Registration error:', error);
+    console.error("Registration error:", error);
     return NextResponse.json(
-      { message: 'Internal server error' },
+      { message: "Internal server error" },
       { status: 500 }
     );
   } finally {
