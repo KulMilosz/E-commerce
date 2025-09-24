@@ -45,10 +45,8 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
-        console.error(err.message);
         setErrorMessage(err.message);
       } else {
-        console.error(err);
         setErrorMessage("Błąd sieciowy");
       }
     }

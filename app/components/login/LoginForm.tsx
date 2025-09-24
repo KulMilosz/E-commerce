@@ -71,7 +71,6 @@ const LoginForm: React.FC = () => {
         router.refresh();
       }
     } catch (error) {
-      console.error("Login error:", error);
       setErrorMessage("Network error. Please try again.");
       setStep("email");
       reset();

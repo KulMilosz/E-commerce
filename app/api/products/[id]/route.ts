@@ -53,7 +53,6 @@ export async function GET(
       createdAt: product.createdAt
     });
   } catch (error) {
-    console.error('Product fetch error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

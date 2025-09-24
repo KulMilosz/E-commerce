@@ -5,6 +5,7 @@ export interface ProductWithNumericPrice {
   id: string;
   name: string;
   price: number;
+  stock: number;
   imageUrl: string;
   category: { name: string };
   brand: { name: string; logoUrl: string };
@@ -91,6 +92,7 @@ export interface BrandCardProps {
 
 export interface ProductCardProps {
   product: ProductWithNumericPrice;
+  quantity?: number;
 }
 
 export interface CardProps {
@@ -128,17 +130,16 @@ export interface ProductDetailInfo {
 export interface QuantitySelectorProps {
   price: number;
   stock: number;
+  product: string;
+  initialQuantity?: number;
   onChange?: (quantity: number, total: number) => void;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
-
 export interface CartButtonProps {
   color?: string;
 }
 
-import NextAuth from 'next-auth';
-
-declare module 'next-auth' {
+declare module "next-auth" {
   interface Session {
     user: {
       id: string;
@@ -154,7 +155,7 @@ declare module 'next-auth' {
   }
 }
 
-declare module 'next-auth/jwt' {
+declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     name?: string | null;

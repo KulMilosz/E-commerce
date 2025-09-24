@@ -14,7 +14,6 @@ export async function GET() {
 
     return NextResponse.json({ brands: sortedBrands });
   } catch (error) {
-    console.error("Brands fetch error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

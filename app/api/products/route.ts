@@ -74,7 +74,6 @@ export async function GET(request: NextRequest) {
       pagination: { page, limit, total, totalPages },
     });
   } catch (error) {
-    console.error("Products fetch error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

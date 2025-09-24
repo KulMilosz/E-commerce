@@ -35,7 +35,6 @@ export const authOptions: NextAuthOptions = {
             name: result.user.firstName,
           };
         } catch (error) {
-          console.error("NextAuth authorize error:", error);
           return null;
         }
       },

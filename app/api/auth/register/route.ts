@@ -20,8 +20,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { email, mobile, password, country, acceptPolicy } =
-      validationResult.data;
+    const { email, mobile, password } = validationResult.data;
 
     const existingUserByEmail = await prisma.user.findUnique({
       where: { email },
@@ -71,7 +70,6 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
   } catch (error) {
-    console.error("Registration error:", error);
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }

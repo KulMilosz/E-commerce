@@ -19,6 +19,7 @@ model User {
 
 
   orders Order[]
+  cart   Cart?
 
   @@map("users")
 }
@@ -65,6 +66,7 @@ model Product {
   category   Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   brand      Brand      @relation(fields: [brandId], references: [id], onDelete: Cascade)
   orderItems OrderItem[]
+  cartItems  CartItem[]
 
   @@map("products")
 }
@@ -97,6 +99,33 @@ model OrderItem {
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@map("order_items")
+}
+
+
+model Cart {
+  id        String     @id @default(cuid())
+  userId    String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cartItems  CartItem[]
+
+  @@map("carts")
+}
+
+
+model CartItem {
+  id        String  @id @default(cuid())
+  cartId    String
+  productId String
+  quantity  Int
+
+  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, productId])
+  @@map("cart_items")
 }
 
 

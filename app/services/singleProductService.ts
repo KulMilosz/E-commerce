@@ -15,7 +15,6 @@ export async function getProduct(
 
     return await response.json();
   } catch (error) {
-    console.error("Error fetching product:", error);
     return null;
   }
 }

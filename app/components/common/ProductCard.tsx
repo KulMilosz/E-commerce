@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ProductCardProps } from "../../types";
+import { addToCart } from "@/app/lib/addToCart";
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
@@ -13,13 +14,14 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="p-4 pb-0 flex-1">
         <div className="relative w-full h-56 mx-auto flex items-center justify-center rounded-md overflow-hidden bg-white">
           <button
-            className="absolute top-2 left-2 bg-black text-white w-8 h-8 rounded-md hover:bg-gray-800 transition-colors duration-300 flex items-center justify-center cursor-pointer"
+            className="absolute top-3 left-3 bg-[#262626] text-white w-9 h-9 rounded-lg hover:bg-orange-500 transition-colors duration-300 flex items-center justify-center z-10 cursor-pointer"
             onClick={(e) => {
-              e.preventDefault();
               e.stopPropagation();
+              e.preventDefault();
+              addToCart(product.id);
             }}
           >
-            <Image src="/Cart.svg" alt="Add to cart" width={20} height={20} />
+            <Image src="/Cart.svg" alt="Add to cart" width={24} height={24} />
           </button>
 
           {product.imageUrl ? (

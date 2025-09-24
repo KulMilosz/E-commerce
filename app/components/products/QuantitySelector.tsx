@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react";
 import { QuantitySelectorProps } from "@/app/types";
 import Image from "next/image";
+import { addToCart } from "@/app/lib/addToCart";
 
 const QuantitySelector: React.FC<QuantitySelectorProps> = ({
   price,
   stock,
   onChange,
-  onClick,
+  product,
 }) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [total, setTotal] = useState<number>(price * quantity);
@@ -56,7 +57,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
         <span className="text-heading-w-5 font-medium">${total}</span>
       </div>
       <button
-        onClick={onClick}
+        onClick={() => addToCart(product, quantity)}
         disabled={stock === 0}
         className={`flex h-14 w-full items-center justify-center  mb-6 rounded-lg space-x-3 transition-colors
     border ${

@@ -13,7 +13,6 @@ export default async function ProductDetailPage({
   params: { id: string };
 }) {
   const product = await getProduct(params.id);
-  console.log(product);
 
   if (!product) {
     notFound();
@@ -118,7 +117,11 @@ export default async function ProductDetailPage({
               <ProductColors />
             </div>
             <div className="flex flex-col ml-6 mt-6 space-y-4 ">
-              <QuantitySelector price={product.price} stock={product.stock} />
+              <QuantitySelector
+                price={product.price}
+                stock={product.stock}
+                product={product.id}
+              />
             </div>
           </div>
         </div>
