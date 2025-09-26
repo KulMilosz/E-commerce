@@ -4,10 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React from "react";
-
-interface BreadcrumbProps {
-  productName?: string;
-}
+import { BreadcrumbProps } from "@/app/types";
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ productName }) => {
   const pathname = usePathname();

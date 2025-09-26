@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Providers from "./components/providers/SessionProvider";
+import { NotificationProvider } from "./components/providers/NotificationProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,9 +26,11 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body className="antialiased font-sans">
         <Providers>
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
+          <NotificationProvider>
+            <Header />
+            <main className="min-h-screen mx-4 sm:mx-6 lg:mx-10">{children}</main>
+            <Footer />
+          </NotificationProvider>
         </Providers>
       </body>
     </html>

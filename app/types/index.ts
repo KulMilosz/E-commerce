@@ -1,6 +1,87 @@
 import { Product, Category } from "../generated/prisma";
 import { ReactNode } from "react";
 
+export interface Notification {
+  id: string;
+  type: "success" | "error" | "info" | "warning";
+  message: string;
+  duration?: number;
+}
+
+export interface NotificationContextType {
+  currentNotification: Notification | null;
+  showNotification: (notification: Omit<Notification, "id">) => void;
+  hideNotification: () => void;
+}
+
+export interface NotificationProviderProps {
+  children: ReactNode;
+}
+
+export interface CartResponse {
+  id: string;
+  cartItems: CartItem[];
+}
+
+export interface CheckoutDetailsProps {
+  selectedItems: CartItem[];
+  itemTotals: Record<string, { qty: number; total: number }>;
+  onItemTotalChange: (itemId: string, qty: number, total: number) => void;
+  productProtection: boolean;
+  onProductProtectionChange: (value: boolean) => void;
+}
+
+export interface OrderSummaryProps {
+  selectedItems: CartItem[];
+  itemTotals: Record<string, { qty: number; total: number }>;
+  onPayNow: () => void;
+  productProtection: boolean;
+}
+
+export interface TotalProps {
+  cartItems: CartItem[];
+  selected: string[];
+  itemTotals: Record<string, { qty: number; total: number }>;
+}
+
+export interface BreadcrumbProps {
+  productName?: string;
+}
+
+export interface ProvidersProps {
+  children: ReactNode;
+}
+
+export interface ProductDescriptionProps {
+  description: string;
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+
+export interface LoginFormProps {
+  type: "login" | "register";
+}
+
+export type CartWithProducts = {
+  id: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  cartItems: Array<{
+    id: string;
+    cartId: string;
+    productId: string;
+    quantity: number;
+    product: Product;
+  }>;
+};
+
+export type SearchParams = { [key: string]: string | string[] | undefined };
+
 export interface ProductWithNumericPrice {
   id: string;
   name: string;

@@ -2,14 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Breadcrumb from "../components/layout/Breadcrumb";
-import { CartItem } from "../types";
+import { CartResponse } from "../types";
 import ProductCardCart from "../components/cart/ProductCardCart";
 import { removeFromCart } from "../lib/removeFromCart";
-
-interface CartResponse {
-  id: string;
-  cartItems: CartItem[];
-}
+import Total from "../components/cart/Total";
 
 export default function CartPage() {
   const [selected, setSelected] = useState<string[]>([]);
@@ -58,18 +54,28 @@ export default function CartPage() {
     } catch {}
   };
 
-  if (loading) return <div>Ładowanie koszyka...</div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center">
+        Ładowanie koszyka...
+      </div>
+    );
   if (error) return <div>Błąd: {error}</div>;
   if (!cart || cart.cartItems.length === 0)
-    return <div>Twój koszyk jest pusty</div>;
+    return (
+      <div className="flex justify-center items-center">
+        Twój koszyk jest pusty
+      </div>
+    );
 
   return (
     <div className="flex flex-col p-10">
       <Breadcrumb />
-      <label className="mb-4 flex items-center gap-2">
+      <label className="mb-4 flex items-center gap-2 mt-12 cursor-pointer w-fit">
         <input
           ref={selectAllRef}
           type="checkbox"
+          className="w-6 h-6 mr-2 accent-[#F29145] cursor-pointer"
           checked={
             selected.length > 0 &&
             cart.cartItems.length > 0 &&
@@ -82,57 +88,52 @@ export default function CartPage() {
             setSelected(allSelected ? [] : allIds);
           }}
         />
-        Zaznacz wszystkie
+        Select All
       </label>
+      <div className="flex w-full justify-between">
+        <div className="flex flex-col gap-8 w-full ">
+          {cart.cartItems.map((item) => (
+            <div key={item.id} className="flex">
+              <div className="flex items-center justify-center">
+                <input
+                  className="w-6 h-6 mr-6 accent-[#F29145] cursor-pointer"
+                  type="checkbox"
+                  checked={selected.includes(item.id)}
+                  onChange={() =>
+                    setSelected((prev) =>
+                      prev.includes(item.id)
+                        ? prev.filter((x) => x !== item.id)
+                        : [...prev, item.id]
+                    )
+                  }
+                />
+              </div>
 
-      <div className="flex flex-col gap-3">
-        {cart.cartItems.map((item) => (
-          <div
-            key={item.id}
-            className="flex items-center gap-3 rounded-md border p-3"
-          >
-            <input
-              type="checkbox"
-              checked={selected.includes(item.id)}
-              onChange={() =>
-                setSelected((prev) =>
-                  prev.includes(item.id)
-                    ? prev.filter((x) => x !== item.id)
-                    : [...prev, item.id]
-                )
-              }
-            />
-            <ProductCardCart
-              product={item.product}
-              quantity={item.quantity}
-              onItemTotalChange={(qty, total) =>
-                setItemTotals((prev) => ({
-                  ...prev,
-                  [item.id]: { qty, total },
-                }))
-              }
-              onRemove={() => handleRemoveItem(item.id)}
+              <div className="flex items-center rounded-lg justify-between w-full">
+                <ProductCardCart
+                  product={item.product}
+                  quantity={item.quantity}
+                  onItemTotalChange={(qty, total) =>
+                    setItemTotals((prev) => ({
+                      ...prev,
+                      [item.id]: { qty, total },
+                    }))
+                  }
+                  onRemove={() => handleRemoveItem(item.id)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex h-full ">
+          <div className="flex items-center justify-center self-center">
+            <Total
+              cartItems={cart.cartItems}
+              selected={selected}
+              itemTotals={itemTotals}
             />
           </div>
-        ))}
-      </div>
-      <div className="mt-6 self-end text-right">
-        {(() => {
-          const grandTotal = cart.cartItems
-            .filter((i) => selected.includes(i.id))
-            .reduce((sum, i) => {
-              const current = itemTotals[i.id];
-              const lineTotal = current
-                ? current.total
-                : i.quantity * i.product.price;
-              return sum + lineTotal;
-            }, 0);
-          return (
-            <div className="text-lg font-semibold">
-              Suma zaznaczonych: ${grandTotal.toFixed(2)}
-            </div>
-          );
-        })()}
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-interface ProductDescriptionProps {
-  description: string;
-}
+import { ProductDescriptionProps } from "@/app/types";
 
 export default function ProductDescription({
   description,

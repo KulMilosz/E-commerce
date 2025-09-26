@@ -3,10 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 import { prisma } from "@/app/lib/prisma";
 import { Cart, CartItem, Product } from "@/app/generated/prisma";
-
-type CartWithProducts = Cart & {
-  cartItems: (CartItem & { product: Product })[];
-};
+import { CartWithProducts } from "@/app/types";
 
 function mapCartItemPrice(cart: CartWithProducts) {
   return {

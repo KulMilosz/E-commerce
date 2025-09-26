@@ -4,8 +4,7 @@ import { getProducts } from "../services/productsService";
 import ProductsSidebar from "../components/products/ProductsSidebar";
 import ProductsGrid from "../components/products/ProductsGrid";
 import Pagination from "../components/products/Pagination";
-
-type SearchParams = { [key: string]: string | string[] | undefined };
+import { SearchParams } from "@/app/types";
 
 export default async function ProductsPage(props: {
   searchParams: SearchParams | Promise<SearchParams>;
@@ -31,7 +30,7 @@ export default async function ProductsPage(props: {
   const baseUrl = `/products?${urlParams.toString()}`;
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] text-white mt-10">
+    <div className=" bg-[#1a1a1a] text-white">
       <div className="container mx-auto px-8 py-8">
         <div className="border-t border-[#383B42] -mx-8 mb-10"></div>
         <div className="flex gap-8">

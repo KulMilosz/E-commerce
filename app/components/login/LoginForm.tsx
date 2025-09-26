@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useRouter } from "next/navigation";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { z } from "zod";
 import { loginSchema } from "./loginValidation";
 
@@ -30,10 +30,13 @@ const LoginForm: React.FC = () => {
       setErrorMessage("Please enter your email or mobile.");
       return;
     }
-    
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{9,15}$/;
-    if (!emailRegex.test(data.emailOrMobile) && !phoneRegex.test(data.emailOrMobile)) {
+    if (
+      !emailRegex.test(data.emailOrMobile) &&
+      !phoneRegex.test(data.emailOrMobile)
+    ) {
       setErrorMessage("Email or Phone Number is not valid.");
       return;
     }
@@ -117,7 +120,11 @@ const LoginForm: React.FC = () => {
 
         {step === "password" && (
           <>
-            <input type="hidden" {...register("emailOrMobile")} value={emailOrMobile} />
+            <input
+              type="hidden"
+              {...register("emailOrMobile")}
+              value={emailOrMobile}
+            />
             <div>
               <label className="block text-text-l font-medium mb-2">
                 Password

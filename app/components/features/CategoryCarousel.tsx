@@ -36,7 +36,7 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
   const currentCategory = categories[currentIndex];
 
   return (
-    <div className="relative w-full max-w-[1360px] mx-auto px-4">
+    <div className="relative w-full">
       <div className="relative bg-[#222327] rounded-md border border-[#383B42] overflow-hidden h-96 md:h-[500px]">
         <div className="flex flex-col md:flex-row h-full">
           <div className="flex-1 px-4 md:pl-32 md:pr-12 py-8 md:pt-32 md:pb-20 flex flex-col justify-center">

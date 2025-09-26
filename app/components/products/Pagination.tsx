@@ -1,10 +1,5 @@
 import Link from "next/link";
-
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  baseUrl: string;
-}
+import { PaginationProps } from "@/app/types";
 
 export default function Pagination({
   currentPage,

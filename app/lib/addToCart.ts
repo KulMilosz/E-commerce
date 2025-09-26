@@ -1,3 +1,5 @@
+import { showNotification } from "@/app/components/providers/NotificationProvider";
+
 export async function addToCart(productId: string, quantity: number = 1) {
   try {
     const res = await fetch("/api/cart", {
@@ -11,8 +13,21 @@ export async function addToCart(productId: string, quantity: number = 1) {
       throw new Error(err.error || "Błąd dodawania do koszyka");
     }
 
-    return await res.json();
+    const result = await res.json();
+    
+    showNotification({
+      type: "success",
+      message: "Produkt został dodany do koszyka!",
+      duration: 3000,
+    });
+
+    return result;
   } catch (error) {
+    showNotification({
+      type: "error",
+      message: "Błąd podczas dodawania do koszyka",
+      duration: 4000,
+    });
     throw error;
   }
 }

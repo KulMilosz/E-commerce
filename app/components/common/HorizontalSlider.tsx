@@ -23,11 +23,23 @@ export default function HorizontalSlider({
     checkScroll();
     window.addEventListener("resize", checkScroll);
     return () => window.removeEventListener("resize", checkScroll);
-  }, []);
+  }, [children]);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const checkScroll = () => {
+      setCanScroll(el.scrollWidth > el.clientWidth);
+    };
+
+    const timeoutId = setTimeout(checkScroll, 100);
+    return () => clearTimeout(timeoutId);
+  }, [children]);
 
   return (
     <div className={`w-full ${className}`}>
-      <div className="max-w-[1360px] mx-auto">
+      <div>
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-heading-m-4 font-medium">{title}</h2>
           {canScroll && (

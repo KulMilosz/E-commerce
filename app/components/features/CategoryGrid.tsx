@@ -30,10 +30,10 @@ const CategoryGrid = ({ categories }: CategoryGridProps) => {
   }
 
   return (
-    <div className="w-full max-w-[1360px] mx-auto">
+    <div className="w-full">
       <h2 className="text-heading-m-4 font-medium mb-8">Category</h2>
 
-      <div className="flex justify-between w-full max-w-[1360px] h-48">
+      <div className="flex justify-between w-full h-48">
         {categories.map((category) => (
           <Link
             key={category.id}

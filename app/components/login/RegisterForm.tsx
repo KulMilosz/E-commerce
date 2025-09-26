@@ -6,10 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { registerSchema } from "./loginValidation";
 import { z } from "zod";
-
-interface LoginFormProps {
-  type: "login" | "register";
-}
+import { LoginFormProps } from "@/app/types";
 
 const RegisterForm: React.FC<LoginFormProps> = () => {
   const router = useRouter();
@@ -160,7 +157,7 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
           <input
             type="checkbox"
             {...register("acceptPolicy")}
-            className="w-[26px] h-[26px] mr-2 accent-[#F29145] cursor-pointer"
+            className=" w-6 h-6 mr-2 accent-[#F29145] cursor-pointer"
           />
           <div className="text-sm text-gray-400">
             By creating an account and checking, you agree to the{" "}
