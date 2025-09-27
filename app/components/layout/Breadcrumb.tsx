@@ -3,13 +3,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import React from "react";
 import { BreadcrumbProps } from "@/app/types";
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ productName }) => {
   const pathname = usePathname();
+  const { data: session } = useSession();
   const pathParts = pathname.split("/").filter(Boolean);
   const displayParts = pathParts;
+
+  if (pathname === "/contact" && !session) {
+    return null;
+  }
 
   return (
     <nav className="text-text-m font-medium mb-4" aria-label="breadcrumb">

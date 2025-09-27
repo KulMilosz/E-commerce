@@ -17,7 +17,9 @@ export async function GET(request: NextRequest) {
     const maxPrice = searchParams.get("maxPrice");
     const sortBy = searchParams.get("sortBy") || "latest";
 
-    const where: Prisma.ProductWhereInput = {};
+    const where: Prisma.ProductWhereInput = {
+      stock: { gt: 0 },
+    };
 
     if (category && category !== "all") {
       where.categoryId = category;

@@ -46,7 +46,7 @@ export async function POST(req: Request) {
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {
-    const { selectedCartItemIds } = await req.json();
+    const { selectedCartItemIds, itemsWithQuantities, grandTotal } = await req.json();
     if (!selectedCartItemIds?.length) {
       return NextResponse.json({ error: "No items selected for order" }, { status: 400 });
     }
@@ -67,16 +67,22 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No valid items found in cart" }, { status: 400 });
     }
 
-    for (const item of cart.cartItems) {
-      if (item.quantity > item.product.stock) {
-        return NextResponse.json({
-          error: `Not enough stock for ${item.product.name}. Available: ${item.product.stock}, Requested: ${item.quantity}`
-        }, { status: 400 });
+    const itemsToProcess = cart.cartItems.map((item) => {
+      const quantityData = itemsWithQuantities?.find((q: any) => q.cartItemId === item.id);
+      const finalQuantity = quantityData ? quantityData.quantity : item.quantity;
+      
+      if (finalQuantity > item.product.stock) {
+        throw new Error(`Not enough stock for ${item.product.name}. Available: ${item.product.stock}, Requested: ${finalQuantity}`);
       }
-    }
+      
+      return {
+        ...item,
+        finalQuantity,
+      };
+    });
 
-    const totalAmount = cart.cartItems.reduce((sum, item) => 
-      sum + (Number(item.product.price) * item.quantity), 0
+    const totalAmount = grandTotal || itemsToProcess.reduce((sum, item) => 
+      sum + (Number(item.product.price) * item.finalQuantity), 0
     );
 
     const result = await prisma.$transaction(async (tx) => {
@@ -85,12 +91,12 @@ export async function POST(req: Request) {
       });
 
       await Promise.all(
-        cart.cartItems.map(item =>
+        itemsToProcess.map(item =>
           tx.orderItem.create({
             data: {
               orderId: order.id,
               productId: item.productId,
-              quantity: item.quantity,
+              quantity: item.finalQuantity,
               priceAtPurchase: Number(item.product.price),
             },
           })
@@ -100,10 +106,10 @@ export async function POST(req: Request) {
       await tx.cartItem.deleteMany({ where: { id: { in: selectedCartItemIds } } });
 
       await Promise.all(
-        cart.cartItems.map(item =>
+        itemsToProcess.map(item =>
           tx.product.update({
             where: { id: item.productId },
-            data: { stock: { decrement: item.quantity } },
+            data: { stock: { decrement: item.finalQuantity } },
           })
         )
       );

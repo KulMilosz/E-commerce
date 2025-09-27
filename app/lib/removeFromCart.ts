@@ -8,7 +8,7 @@ export async function removeFromCart(cartItemId: string) {
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error || "Błąd usuwania z koszyka");
+      throw new Error(err.error || "Error removing from cart");
     }
 
     return await res.json();
@@ -26,7 +26,7 @@ export async function clearCart() {
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error || "Błąd czyszczenia koszyka");
+      throw new Error(err.error || "Error clearing cart");
     }
 
     return await res.json();

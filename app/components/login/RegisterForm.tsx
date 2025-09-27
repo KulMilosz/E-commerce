@@ -35,7 +35,7 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
 
       const result = await res.json();
       if (!res.ok) {
-        setErrorMessage(result.message || "Błąd rejestracji");
+        setErrorMessage(result.message || "Registration error");
       } else {
         document.cookie = "registered=true; path=/; max-age=5";
         router.push("/register-success");
@@ -44,7 +44,7 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
       if (err instanceof Error) {
         setErrorMessage(err.message);
       } else {
-        setErrorMessage("Błąd sieciowy");
+        setErrorMessage("Network error");
       }
     }
   };

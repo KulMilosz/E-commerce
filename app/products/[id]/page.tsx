@@ -95,7 +95,7 @@ export default async function ProductDetailPage({
                       height={24}
                     />
                     <span className="text-text-m font-medium">
-                      NexusHub Courier
+                      DevstockHub Courier
                     </span>
                   </div>
 

@@ -6,6 +6,9 @@ const prisma = new PrismaClient();
 export async function GET() {
   try {
     const allProducts = await prisma.product.findMany({
+      where: {
+        stock: { gt: 0 },
+      },
       include: {
         category: {
           select: {

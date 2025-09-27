@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { useNotification, Notification } from "./NotificationProvider";
-import Image from "next/image";
+import { useNotification } from "./NotificationProvider";
+import { Notification } from "@/app/types";
 
 const Toast: React.FC<{ notification: Notification }> = ({ notification }) => {
-  const { removeNotification } = useNotification();
+  const { hideNotification } = useNotification();
 
   const getIcon = () => {
     switch (notification.type) {
@@ -51,7 +51,7 @@ const Toast: React.FC<{ notification: Notification }> = ({ notification }) => {
       </div>
       
       <button
-        onClick={() => removeNotification(notification.id)}
+        onClick={() => hideNotification()}
         className="flex-shrink-0 w-5 h-5 flex items-center justify-center hover:bg-white hover:bg-opacity-20 rounded transition-colors"
       >
         <span className="text-xs">✕</span>
@@ -61,15 +61,14 @@ const Toast: React.FC<{ notification: Notification }> = ({ notification }) => {
 };
 
 export const NotificationContainer: React.FC = () => {
-  const { notifications } = useNotification();
+  const { currentNotification } = useNotification();
 
-  if (notifications.length === 0) return null;
+  if (!currentNotification) return null;
 
   return (
     <div className="fixed top-4 right-4 z-50 space-y-2">
-      {notifications.map((notification) => (
-        <Toast key={notification.id} notification={notification} />
-      ))}
+      <Toast notification={currentNotification} />
     </div>
   );
 };
+

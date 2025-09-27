@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { z } from "zod";
 import { loginSchema } from "./loginValidation";
+import { showNotification } from "../providers/NotificationProvider";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -71,6 +72,12 @@ const LoginForm: React.FC = () => {
 
       if (result?.ok) {
         router.push("/");
+        showNotification({
+          type: "success",
+          title: "Success",
+          message: "User logged in successfully.",
+          duration: 3000,
+        });
         router.refresh();
       }
     } catch (error) {

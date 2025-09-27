@@ -6,6 +6,7 @@ import Breadcrumb from "../components/layout/Breadcrumb";
 import { CartItem, CartResponse } from "../types";
 import CheckoutDetails from "../components/checkout/CheckoutDetails";
 import OrderSummary from "../components/checkout/OrderSummary";
+import { showNotification } from "../components/providers/NotificationProvider";
 
 export default function CheckoutPage() {
   const searchParams = useSearchParams();
@@ -33,7 +34,7 @@ export default function CheckoutPage() {
         const res = await fetch("/api/cart");
         if (!res.ok) {
           const data = await res.json();
-          throw new Error(data.error || "Błąd pobierania koszyka");
+          throw new Error(data.error || "Error fetching cart");
         }
 
         const cartData: CartResponse = await res.json();
@@ -63,7 +64,7 @@ export default function CheckoutPage() {
         if (err instanceof Error) {
           setError(err.message);
         } else {
-          setError("Nieznany błąd");
+          setError("Unknown error");
         }
       } finally {
         setLoading(false);
@@ -87,6 +88,38 @@ export default function CheckoutPage() {
   const handlePayNow = async () => {
     try {
       const selectedCartItemIds = selectedItems.map((item) => item.id);
+      
+      const itemsWithQuantities = selectedItems.map((item) => {
+        const currentTotal = itemTotals[item.id];
+        return {
+          cartItemId: item.id,
+          quantity: currentTotal ? currentTotal.qty : item.quantity,
+        };
+      });
+
+      const totalProductPrice = selectedItems.reduce((sum, item) => {
+        const current = itemTotals[item.id];
+        const total = current ? current.total : item.quantity * item.product.price;
+        return sum + total;
+      }, 0);
+
+      const totalQuantity = selectedItems.reduce((sum, item) => {
+        const current = itemTotals[item.id];
+        const qty = current ? current.qty : item.quantity;
+        return sum + qty;
+      }, 0);
+
+      const productProtectionPrice = productProtection ? 1 : 0;
+      const shippingPrice = 5;
+      const shippingInsurance = 6;
+      const transactionFees = totalQuantity * 0.5;
+
+      const grandTotal =
+        totalProductPrice +
+        productProtectionPrice +
+        shippingPrice +
+        shippingInsurance +
+        transactionFees;
 
       const response = await fetch("/api/orders", {
         method: "POST",
@@ -95,30 +128,42 @@ export default function CheckoutPage() {
         },
         body: JSON.stringify({
           selectedCartItemIds,
+          itemsWithQuantities,
+          grandTotal,
         }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Błąd tworzenia zamówienia");
+        throw new Error(errorData.error || "Error creating order");
       }
 
-      const orderData = await response.json(); // Will be used for future order summary page
+      const orderData = await response.json();
 
-      router.push("/cart");
+      router.push(`/order-success?orderId=${orderData.id}`);
     } catch (err: unknown) {
       if (err instanceof Error) {
-        alert(`Błąd: ${err.message}`);
+        showNotification({
+          type: "error",
+          title: "Error",
+          message: err.message,
+          duration: 5000,
+        });
       } else {
-        alert("Nieznany błąd podczas tworzenia zamówienia");
+        showNotification({
+          type: "error",
+          title: "Error",
+          message: "Unknown error occurred while creating order",
+          duration: 5000,
+        });
       }
     }
   };
 
-  if (loading) return <div className="p-10">Ładowanie...</div>;
-  if (error) return <div className="p-10">Błąd: {error}</div>;
+  if (loading) return <div className="p-10">Loading...</div>;
+  if (error) return <div className="p-10">Error: {error}</div>;
   if (!selectedItems || selectedItems.length === 0) {
-    return <div className="p-10">Brak zaznaczonych produktów do checkout</div>;
+    return <div className="p-10">No selected items for checkout</div>;
   }
 
   return (

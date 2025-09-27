@@ -22,6 +22,7 @@ export default function ContactPage() {
   const onSubmit = () => {
     showNotification({
       type: "success",
+      title: "Sukces",
       message: "Message has been sent successfully!",
       duration: 3000,
     });

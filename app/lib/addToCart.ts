@@ -10,14 +10,15 @@ export async function addToCart(productId: string, quantity: number = 1) {
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error || "Błąd dodawania do koszyka");
+      throw new Error(err.error || "Error adding to cart");
     }
 
     const result = await res.json();
     
     showNotification({
       type: "success",
-      message: "Produkt został dodany do koszyka!",
+      title: "Success",
+      message: "Product has been added to cart!",
       duration: 3000,
     });
 
@@ -25,7 +26,8 @@ export async function addToCart(productId: string, quantity: number = 1) {
   } catch (error) {
     showNotification({
       type: "error",
-      message: "Błąd podczas dodawania do koszyka",
+      title: "Error",
+      message: "Error occurred while adding to cart",
       duration: 4000,
     });
     throw error;

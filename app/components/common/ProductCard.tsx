@@ -9,7 +9,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={`/products/${product.id}`}
-      className="group bg-[#222327] border border-[#383B42] rounded-md overflow-hidden hover:border-[#F29145] transition-colors duration-300 w-75 h-96 flex flex-col cursor-pointer"
+      className="group bg-[#222327] border border-[#383B42] rounded-md overflow-hidden hover:border-[#F29145] transition-colors duration-300 w-75 h-96 flex-shrink-0 flex flex-col cursor-pointer"
     >
       <div className="p-4 pb-0 flex-1">
         <div className="relative w-full h-56 mx-auto flex items-center justify-center rounded-md overflow-hidden bg-white">

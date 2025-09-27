@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="bg-[#1a1a1a] w-full">
       <HeaderActions />
-      {!["/register-success", "/login", "/register"].includes(pathname) && (
+      {!["/register-success", "/login", "/register", "/contact"].includes(pathname) && (
         <Navigation />
       )}
 
