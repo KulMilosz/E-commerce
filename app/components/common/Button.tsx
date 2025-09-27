@@ -2,11 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
-
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  route?: string;
-  label: string;
-};
+import { ButtonProps } from "../../types";
 
 const Button = ({ route, label, onClick, ...rest }: ButtonProps) => {
   const router = useRouter();

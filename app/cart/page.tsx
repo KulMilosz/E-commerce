@@ -59,6 +59,7 @@ export default function CartPage() {
         message: "Failed to remove product from cart",
         duration: 3000,
       });
+    }
   };
 
   if (loading)

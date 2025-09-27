@@ -1,5 +1,7 @@
 import { Product, Category } from "../generated/prisma";
 import { ReactNode } from "react";
+import { z } from "zod";
+import { loginSchema, registerSchema, contactSchema } from "../components/login/loginValidation";
 
 export interface Notification {
   id: string;
@@ -244,3 +246,69 @@ declare module "next-auth/jwt" {
     email?: string | null;
   }
 }
+
+export interface User {
+  id: string;
+  firstName: string;
+  email: string;
+  mobile: string;
+  orders: Order[];
+}
+
+export interface Order {
+  id: string;
+  createdAt: string;
+  status: string;
+  totalAmount: number | string;
+  orderItems: OrderItem[];
+}
+
+export interface OrderItem {
+  id: string;
+  quantity: number;
+  priceAtPurchase: number | string;
+  product: {
+    id: string;
+    name: string;
+    imageUrl: string;
+  };
+}
+
+export interface OrderSuccessOrderItem {
+  id: string;
+  productId: string;
+  quantity: number;
+  priceAtPurchase: number;
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    imageUrl: string;
+    stock: number;
+    category: {
+      name: string;
+    };
+    brand: {
+      name: string;
+      logoUrl: string;
+    };
+  };
+}
+
+export interface OrderSuccessOrder {
+  id: string;
+  userId: string;
+  createdAt: string;
+  status: string;
+  totalAmount: number;
+  orderItems: OrderSuccessOrderItem[];
+}
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  route?: string;
+  label: string;
+}
+
+export type LoginFormData = z.infer<typeof loginSchema>;
+export type RegisterFormData = z.infer<typeof registerSchema>;
+export type ContactFormData = z.infer<typeof contactSchema>;

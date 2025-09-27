@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const UserAvatar = () => {
   const { data: session } = useSession();
@@ -18,9 +19,11 @@ const UserAvatar = () => {
 
   return (
     <div className="ml-4">
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-200 to-orange-400 border-2 border-orange-500 flex items-center justify-center">
-        <span className="text-orange-800 font-bold text-sm">{getInitial()}</span>
-      </div>
+      <Link href="/profile">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-200 to-orange-400 border-2 border-orange-500 flex items-center justify-center cursor-pointer hover:from-orange-300 hover:to-orange-500 transition-colors duration-300">
+          <span className="text-orange-800 font-bold text-sm">{getInitial()}</span>
+        </div>
+      </Link>
     </div>
   );
 };

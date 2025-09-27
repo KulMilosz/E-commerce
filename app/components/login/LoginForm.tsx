@@ -5,11 +5,9 @@ import { useForm } from "react-hook-form";
 
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { z } from "zod";
 import { loginSchema } from "./loginValidation";
 import { showNotification } from "../providers/NotificationProvider";
-
-type LoginFormData = z.infer<typeof loginSchema>;
+import { LoginFormData } from "@/app/types";
 
 const LoginForm: React.FC = () => {
   const router = useRouter();

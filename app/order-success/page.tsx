@@ -5,41 +5,12 @@ import { useSearchParams, useRouter } from "next/navigation";
 import ProductCardCart from "../components/cart/ProductCardCart";
 import Link from "next/link";
 import { showNotification } from "../components/providers/NotificationProvider";
-
-interface OrderItem {
-  id: string;
-  productId: string;
-  quantity: number;
-  priceAtPurchase: number;
-  product: {
-    id: string;
-    name: string;
-    price: number;
-    imageUrl: string;
-    stock: number;
-    category: {
-      name: string;
-    };
-    brand: {
-      name: string;
-      logoUrl: string;
-    };
-  };
-}
-
-interface Order {
-  id: string;
-  userId: string;
-  createdAt: string;
-  status: string;
-  totalAmount: number;
-  orderItems: OrderItem[];
-}
+import { OrderSuccessOrder } from "../types";
 
 export default function OrderSuccessPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<OrderSuccessOrder | null>(null);
   const [loading, setLoading] = useState(true);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -70,6 +41,7 @@ export default function OrderSuccessPage() {
           message: "Failed to load order",
           duration: 5000,
         });
+        console.log(err);
         setShouldRedirect(true);
         router.replace("/");
       } finally {

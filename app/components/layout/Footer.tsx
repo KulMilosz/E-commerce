@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -14,11 +15,36 @@ const Footer = () => {
           </p>
 
           <div className="flex flex-wrap gap-1 xs:gap-2 sm:gap-4">
-            <span className="text-white text-sm">VISA</span>
-            <span className="text-white text-sm">Mastercard</span>
-            <span className="text-white text-sm">PayPal</span>
-            <span className="text-white text-sm">Apple Pay</span>
-            <span className="text-white text-sm">Google Pay</span>
+            <Image
+              src="/visa.svg"
+              alt="Visa Payment Method"
+              width={46}
+              height={30}
+            />
+            <Image
+              src="/mastercard.svg"
+              alt="Mastercard Payment Method"
+              width={46}
+              height={30}
+            />
+            <Image
+              src="/paypal.svg"
+              alt="Paypal Payment Method"
+              width={46}
+              height={30}
+            />
+            <Image
+              src="/apple.svg"
+              alt="Apple Payment Method"
+              width={46}
+              height={30}
+            />
+            <Image
+              src="/google.svg"
+              alt="Google Payment Method"
+              width={46}
+              height={30}
+            />
           </div>
         </div>
 

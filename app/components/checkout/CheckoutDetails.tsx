@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {  CheckoutDetailsProps } from "@/app/types";
+import { CheckoutDetailsProps } from "@/app/types";
 import ProductCardCart from "../cart/ProductCardCart";
 import Image from "next/image";
 
@@ -156,7 +156,12 @@ const CheckoutDetails: React.FC<CheckoutDetailsProps> = ({
       <h2 className="text-heading-w-6 font-medium ">Payment Method</h2>
       <div className="bg-[#262626] border border-[#383B42] rounded-lg p-6">
         <div className="flex gap-2 items-center justify-start">
-          <Image src="/apple.svg" alt="Shield Icon" width={46} height={30} />
+          <Image
+            src="/apple.svg"
+            alt="Apple Payment Method"
+            width={46}
+            height={30}
+          />
           <span className="text-text-l font-medium">Apple Pay</span>
         </div>
       </div>

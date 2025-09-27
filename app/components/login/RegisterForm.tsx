@@ -5,27 +5,25 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { registerSchema } from "./loginValidation";
-import { z } from "zod";
-import { LoginFormProps } from "@/app/types";
+import { LoginFormProps, RegisterFormData } from "@/app/types";
 
 const RegisterForm: React.FC<LoginFormProps> = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const schema = registerSchema;
-  type FormData = z.infer<typeof schema>;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<RegisterFormData>({
     resolver: zodResolver(schema),
     mode: "onSubmit",
     reValidateMode: "onChange",
   });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: RegisterFormData) => {
     try {
       const res = await fetch("/api/auth/register", {
         method: "POST",
@@ -49,7 +47,7 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
     }
   };
 
-  const inputClass = (field: keyof FormData) =>
+  const inputClass = (field: keyof RegisterFormData) =>
     `w-full px-3 py-2 border-2 rounded-lg text-text-m focus:outline-none ${
       errors[field]
         ? "border-[#DC2626]"

@@ -2,12 +2,10 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import Breadcrumb from "../components/layout/Breadcrumb";
 import { showNotification } from "../components/providers/NotificationProvider";
 import { contactSchema } from "../components/login/loginValidation";
-
-type ContactFormData = z.infer<typeof contactSchema>;
+import { ContactFormData } from "../types";
 
 export default function ContactPage() {
   const {
