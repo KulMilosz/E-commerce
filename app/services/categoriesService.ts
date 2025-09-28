@@ -6,9 +6,7 @@ export async function getCategories() {
     
     console.log('Fetching categories from:', baseUrl);
                  
-    const res = await fetch(`${baseUrl}/api/categories`, {
-      cache: "no-store",
-    });
+    const res = await fetch(`${baseUrl}/api/categories`);
 
     if (!res.ok) {
       console.error('Categories fetch failed:', res.status, res.statusText);

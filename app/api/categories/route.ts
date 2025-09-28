@@ -22,6 +22,10 @@ export async function GET() {
         exploreInfo: c.exploreInfo,
         productCount: c._count.products,
       })),
+    }, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+      },
     });
   } catch {
     return NextResponse.json(

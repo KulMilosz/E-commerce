@@ -8,9 +8,7 @@ export async function getProduct(
     const baseUrl = process.env.NEXTAUTH_URL || 
                    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
     
-    const response = await fetch(`${baseUrl}/api/products/${id}`, {
-      cache: "no-store",
-    });
+    const response = await fetch(`${baseUrl}/api/products/${id}`);
 
     if (!response.ok) {
       return null;

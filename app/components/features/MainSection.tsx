@@ -13,8 +13,8 @@ const MainSection = async () => {
   
   const [categories, productsResponse, brandsResponse] = await Promise.all([
     getCategories(),
-    fetch(`${baseUrl}/api/products/random`, { cache: "no-store" }),
-    fetch(`${baseUrl}/api/brands`, { cache: "no-store" }),
+    fetch(`${baseUrl}/api/products/random`),
+    fetch(`${baseUrl}/api/brands`),
   ]);
 
   const productsData = await productsResponse.json();
