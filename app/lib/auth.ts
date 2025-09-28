@@ -1,5 +1,15 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaClient } from "../generated/prisma";
+import bcrypt from "bcryptjs";
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
+
+const prisma = globalForPrisma.prisma ?? new PrismaClient();
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -20,26 +30,34 @@ export const authOptions: NextAuthOptions = {
             ? credentials.emailOrMobile.toLowerCase() 
             : credentials.emailOrMobile;
 
-          const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              emailOrMobile: normalizedEmailOrMobile,
-              password: credentials.password,
-            }),
+          const isEmail = normalizedEmailOrMobile.includes("@");
+
+          const user = await prisma.user.findFirst({
+            where: isEmail
+              ? { email: normalizedEmailOrMobile }
+              : { mobile: normalizedEmailOrMobile },
           });
 
-          if (!response.ok) {
+          if (!user) {
             return null;
           }
 
-          const result = await response.json();
+          const isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            user.passwordHash
+          );
+
+          if (!isPasswordValid) {
+            return null;
+          }
+
           return {
-            id: result.user.id,
-            email: result.user.email,
-            name: result.user.firstName,
+            id: user.id,
+            email: user.email,
+            name: user.firstName,
           };
         } catch (error) {
+          console.error("Auth error:", error);
           return null;
         }
       },

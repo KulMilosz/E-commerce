@@ -1,6 +1,5 @@
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
-import { prisma } from "@/app/lib/prisma";
 
 export default withAuth(async function middleware(req) {
   const { pathname } = req.nextUrl;
@@ -9,23 +8,7 @@ export default withAuth(async function middleware(req) {
   const authRoutes = ["/login", "/register", "/register-success"];
   const publicRoutes = ["/contact"];
 
-  if (token?.sub) {
-    try {
-      const user = await prisma.user.findUnique({
-        where: { id: token.sub }
-      });
-      
-      if (!user) {
-        const response = NextResponse.redirect(new URL("/login", req.url));
-        response.cookies.delete("next-auth.session-token");
-        response.cookies.delete("next-auth.csrf-token");
-        return response;
-      }
-    } catch (error) {
-      console.error("Error checking user existence:", error);
-    }
-  }
-
+  // Redirect authenticated users away from auth pages
   if (token && authRoutes.some((route) => pathname.startsWith(route))) {
     return NextResponse.redirect(new URL("/", req.url));
   }
@@ -36,11 +19,13 @@ export default withAuth(async function middleware(req) {
       const authRoutes = ["/login", "/register", "/register-success"];
       const publicRoutes = ["/contact"];
 
+      // Allow access to auth pages and public routes without token
       if (!token && (authRoutes.some((route) => pathname.startsWith(route)) || 
                     publicRoutes.some((route) => pathname.startsWith(route)))) {
         return true;
       }
 
+      // Require token for all other routes
       return !!token;
     },
   },
