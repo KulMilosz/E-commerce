@@ -1,6 +1,5 @@
 export async function getCategories() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const res = await fetch(`${baseUrl}/api/categories`, {
+  const res = await fetch("/api/categories", {
     cache: "no-store",
   });
 

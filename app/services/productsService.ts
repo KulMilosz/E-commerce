@@ -13,8 +13,7 @@ export async function getProducts(
   if (filters.maxPrice) params.append("maxPrice", filters.maxPrice);
   if (filters.sortBy) params.append("sortBy", filters.sortBy);
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const response = await fetch(`${baseUrl}/api/products?${params.toString()}`);
+  const response = await fetch(`/api/products?${params.toString()}`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch products");

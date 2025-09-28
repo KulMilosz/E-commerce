@@ -4,8 +4,7 @@ export async function getProduct(
   id: string
 ): Promise<ProductDetailInfo | null> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const response = await fetch(`${baseUrl}/api/products/${id}`, {
+    const response = await fetch(`/api/products/${id}`, {
       cache: "no-store",
     });
 
