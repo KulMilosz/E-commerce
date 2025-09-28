@@ -78,7 +78,7 @@ export default function ProfilePage() {
     <div className="flex flex-col pt-10">
       <Breadcrumb />
 
-      <div className="mt-8 flex gap-12 pt-12">
+      <div className="mt-8 flex gap-12 pt-12 flex-col lg:flex-row p-4 lg:pt-12">
         {/* Left Sidebar - User Profile */}
         <div className="w-80 flex-shrink-0">
           <div className="bg-[#222327] border border-[#383B42] rounded-md p-6">

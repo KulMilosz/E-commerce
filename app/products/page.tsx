@@ -33,7 +33,7 @@ export default async function ProductsPage(props: {
     <div className=" bg-[#1a1a1a] text-white">
       <div className="container mx-auto px-8 py-8">
         <div className="border-t border-[#383B42] -mx-8 mb-10"></div>
-        <div className="flex gap-8">
+        <div className="flex gap-8 flex-col lg:flex-row">
           <aside className="w-80 flex-shrink-0">
             <Suspense fallback={<div>Loading filters...</div>}>
               <ProductsSidebar
