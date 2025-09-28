@@ -7,10 +7,7 @@ import { BrandCardProps } from "@/app/types";
 
 export default function BrandCard({ brand }: BrandCardProps) {
   return (
-    <Card
-      href={`/brands/${brand.id}`}
-      className="w-55 h-48 flex items-center justify-center p-3"
-    >
+    <Card className="w-55 h-48 flex items-center justify-center p-3">
       <div className="w-full h-full flex flex-col items-center justify-center gap-7">
         {brand.logoUrl ? (
           <>

@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#1a1a1a] w-full">
+    <header className="bg-[#1a1a1a] w-full relative">
       <HeaderActions />
       {!shouldHideNavigation() && <Navigation />}
 

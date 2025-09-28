@@ -21,9 +21,11 @@ export async function POST(request: NextRequest) {
     }
 
     const { email, mobile, password } = validationResult.data;
+    
+    const normalizedEmail = email.toLowerCase();
 
     const existingUserByEmail = await prisma.user.findUnique({
-      where: { email },
+      where: { email: normalizedEmail },
     });
 
     if (existingUserByEmail) {
@@ -49,9 +51,9 @@ export async function POST(request: NextRequest) {
 
     const newUser = await prisma.user.create({
       data: {
-        email,
+        email: normalizedEmail,
         mobile,
-        firstName: email.split("@")[0],
+        firstName: normalizedEmail.split("@")[0],
         passwordHash,
       },
       select: {

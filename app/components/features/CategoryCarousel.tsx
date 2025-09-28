@@ -36,14 +36,14 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
   const currentCategory = categories[currentIndex];
 
   return (
-    <div className="relative w-full">
-      <div className="relative bg-[#222327] rounded-md border border-[#383B42] overflow-hidden h-96 md:h-[500px]">
-        <div className="flex flex-col md:flex-row h-full">
-          <div className="flex-1 px-4 md:pl-32 md:pr-12 py-8 md:pt-32 md:pb-20 flex flex-col justify-center">
-            <h2 className=" md:text-4xl lg:text-heading-w-4 text-heading-m-4 font-medium mb-4 md:mb-6 text-[#E7E7E7]">
+    <div className="relative w-full px-4 lg:px-0 ">
+      <div className="relative bg-[#222327] rounded-md border border-[#383B42] overflow-hidden h-96 md:h-[500px] ">
+        <div className="flex md:flex-row h-full">
+          <div className="flex-1 px-20 md:pl-32 md:pr-12 py-8 md:pt-32 md:pb-20 flex flex-col justify-center h-full gap-10 md:gap-0">
+            <h2 className=" md:text-4xl lg:text-heading-w-4 text-heading-m-4 font-medium mb-4 md:mb-6 text-[#E7E7E7] text-center md:text-left">
               {currentCategory.name}
             </h2>
-            <p className=" text-text-m md:text-lg mb-6 md:mb-8 leading-relaxed font-normal text-[#E7E7E7]">
+            <p className=" text-text-m md:text-lg mb-6 md:mb-8 leading-relaxed font-normal text-[#E7E7E7] text-center md:text-left">
               {currentCategory.exploreInfo}
             </p>
             <Link
@@ -64,33 +64,18 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
           </div>
 
           <div
-            className="flex-1 relative bg-transparent flex items-center justify-center"
+            className="flex-0 relative bg-transparent flex items-center justify-center invisible md:visible md:flex-1"
             style={{ height: "500px" }}
           >
-            {currentCategory.image ? (
-              <Image
-                src={currentCategory.image}
-                alt={currentCategory.name}
-                width={currentCategory.name === "Mouse" ? 450 : 800}
-                height={currentCategory.name === "Mouse" ? 800 : 500}
-                className="w-full h-full"
-                style={{
-                  transform:
-                    currentCategory.name === "Mouse"
-                      ? "rotate(-34.55deg) translateY(-60px)"
-                      : "none",
-                  objectFit:
-                    currentCategory.name === "Mouse" ? "contain" : "cover",
-                  background: "transparent",
-                }}
-              />
-            ) : (
-              <div className="text-gray-400 text-center">
-                <div className="text-6xl mb-4">📱</div>
-                <div className="text-lg">Image placeholder</div>
-                <div className="text-sm">for {currentCategory.name}</div>
-              </div>
-            )}
+            <Image
+              src={currentCategory.image}
+              alt={currentCategory.name}
+              fill
+              className="w-full h-full"
+              style={{
+                objectFit: "contain",
+              }}
+            />
           </div>
         </div>
 

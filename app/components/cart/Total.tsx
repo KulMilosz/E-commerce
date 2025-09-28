@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CartItem, TotalProps } from "@/app/types";
+import { TotalProps } from "@/app/types";
 import { useRouter } from "next/navigation";
 
 const Total: React.FC<TotalProps> = ({ cartItems, selected, itemTotals }) => {
@@ -16,7 +16,7 @@ const Total: React.FC<TotalProps> = ({ cartItems, selected, itemTotals }) => {
   const router = useRouter();
 
   return (
-    <div className="text-lg font-semibold flex flex-col gap-4 p-6 ml-12 mr-10 bg-[#262626] border-1 border-[#383B42] rounded-lg min-w-100 min-h-70 justify-between">
+    <div className="text-lg font-semibold flex flex-col gap-4 p-6 lg:ml-12 lg:mr-10 bg-[#262626] border-1 border-[#383B42] rounded-lg lg:min-w-100 w-full  min-h-70 justify-between">
       <span className="text-text-l font-medium">Total Product:</span>
 
       {selectedItems.map((item) => {

@@ -74,7 +74,7 @@ export default function CartPage() {
     );
 
   return (
-    <div className="flex flex-col p-10">
+    <div className="flex flex-col lg:p-10 p-4">
       <Breadcrumb />
       <label className="mb-4 flex items-center gap-2 mt-12 cursor-pointer w-fit">
         <input
@@ -95,7 +95,7 @@ export default function CartPage() {
         />
         Select All
       </label>
-      <div className="flex w-full justify-between">
+      <div className="flex w-full justify-between flex-col lg:flex-row gap-10">
         <div className="flex flex-col gap-8 w-full ">
           {cart.cartItems.map((item) => (
             <div key={item.id} className="flex">
@@ -132,7 +132,7 @@ export default function CartPage() {
           ))}
         </div>
         <div className="flex h-full ">
-          <div className="flex items-center justify-center self-center">
+          <div className="flex items-center justify-center self-center w-full">
             <Total
               cartItems={cart.cartItems}
               selected={selected}

@@ -4,7 +4,7 @@ import { getProducts } from "../services/productsService";
 import ProductsSidebar from "../components/products/ProductsSidebar";
 import ProductsGrid from "../components/products/ProductsGrid";
 import Pagination from "../components/products/Pagination";
-import { SearchParams } from "@/app/types";
+import { SearchParams } from "../types";
 
 export default async function ProductsPage(props: {
   searchParams: SearchParams | Promise<SearchParams>;

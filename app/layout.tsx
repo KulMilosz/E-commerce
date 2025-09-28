@@ -26,11 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="antialiased font-sans">
+      <body className="antialiased font-sans min-h-screen flex flex-col">
         <Providers>
           <NotificationProvider>
             <Header />
-            <main className=" mb-20 mt-10 lg:mx-10">{children}</main>
+            <main className="flex-1 mb-20 mt-10 lg:mx-10">{children}</main>
             <Footer />
           </NotificationProvider>
         </Providers>

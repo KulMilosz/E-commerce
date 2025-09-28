@@ -38,10 +38,14 @@ const LoginForm: React.FC = () => {
       return;
     }
 
+    const normalizedEmailOrMobile = data.emailOrMobile.includes("@") 
+      ? data.emailOrMobile.toLowerCase() 
+      : data.emailOrMobile;
+
     setErrorMessage(null);
-    setEmailOrMobile(data.emailOrMobile);
+    setEmailOrMobile(normalizedEmailOrMobile);
     setStep("password");
-    reset({ emailOrMobile: data.emailOrMobile, password: "" });
+    reset({ emailOrMobile: normalizedEmailOrMobile, password: "" });
   };
 
   const handlePasswordSubmit = async (data: LoginFormData) => {

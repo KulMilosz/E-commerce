@@ -25,10 +25,15 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
+      const normalizedData = {
+        ...data,
+        email: data.email.toLowerCase(),
+      };
+
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(normalizedData),
       });
 
       const result = await res.json();

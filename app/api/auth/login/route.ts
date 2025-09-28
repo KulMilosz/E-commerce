@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     const user = await prisma.user.findFirst({
       where: isEmail
-        ? { email: validEmailOrMobile }
+        ? { email: validEmailOrMobile.toLowerCase() }
         : { mobile: validEmailOrMobile },
     });
 

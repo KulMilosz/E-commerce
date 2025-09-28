@@ -169,10 +169,10 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="flex flex-col p-10">
+    <div className="flex flex-col p-10 max-w-400">
       <Breadcrumb />
 
-      <div className="flex w-full justify-between gap-8 mt-8">
+      <div className="flex w-full justify-between gap-8 mt-8 flex-col lg:flex-row">
         <div className="flex flex-col gap-8 w-full max-w-4xl">
           <h2 className="lg:text-heading-w-6 text-heading-m-6 font-medium ">
             Your Order
@@ -186,8 +186,8 @@ export default function CheckoutPage() {
           />
         </div>
 
-        <div className="flex h-full">
-          <div className="flex items-start justify-center">
+        <div className="flex h-full ">
+          <div className="flex items-start justify-center w-full lg:w-auto ">
             <OrderSummary
               selectedItems={selectedItems}
               itemTotals={itemTotals}

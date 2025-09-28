@@ -30,7 +30,7 @@ export default function ProductsGrid({ products }: ProductsGridProps) {
   return (
     <div>
       <div className="flex items-center justify-start mb-6">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 flex-col lg:flex-row gap-6 ">
           <div className="flex items-center space-x-2">
             <label
               htmlFor="sortBy"
@@ -51,10 +51,10 @@ export default function ProductsGrid({ products }: ProductsGridProps) {
             </select>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 ">
             <label
               htmlFor="show"
-              className="text-xl font-semibold text-[#FCFCFC] leading-7 tracking-tight"
+              className="text-xl font-semibold text-[#FCFCFC] leading-7 tracking-tight "
             >
               Show:
             </label>
@@ -80,7 +80,7 @@ export default function ProductsGrid({ products }: ProductsGridProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-8">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-8 justify-items-center mx-auto">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

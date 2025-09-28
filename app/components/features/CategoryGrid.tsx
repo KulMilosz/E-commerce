@@ -31,14 +31,18 @@ const CategoryGrid = ({ categories }: CategoryGridProps) => {
 
   return (
     <div className="w-full">
-      <h2 className="text-heading-m-4 font-medium mb-8">Category</h2>
+      <h2 className="text-heading-m-4 font-medium mb-8 px-4 lg:px-0">
+        Category
+      </h2>
 
-      <div className="flex justify-between w-full h-48">
+      <div className="flex flex-wrap justify-between w-full gap-4 px-8 lg:px-0">
         {categories.map((category) => (
           <Link
             key={category.id}
             href={`/products?category=${category.id}`}
-            className="group bg-[#222327] border border-[#383B42] rounded-md hover:border-[#F29145] transition-colors duration-300 w-55 h-48 flex items-center justify-center"
+            className="group bg-[#222327] border border-[#383B42] rounded-md hover:border-[#F29145] transition-colors duration-300 
+                 w-full sm:w-[calc(50%-0.5rem)]  lg:w-[calc(20%-0.8rem)] h-48 
+                 flex items-center justify-center"
           >
             <div className="flex flex-col items-center gap-6 text-center">
               <div className="w-16 h-16 flex items-center justify-center">

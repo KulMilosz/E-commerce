@@ -15,11 +15,15 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
+          const normalizedEmailOrMobile = credentials.emailOrMobile.includes("@") 
+            ? credentials.emailOrMobile.toLowerCase() 
+            : credentials.emailOrMobile;
+
           const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              emailOrMobile: credentials.emailOrMobile,
+              emailOrMobile: normalizedEmailOrMobile,
               password: credentials.password,
             }),
           });

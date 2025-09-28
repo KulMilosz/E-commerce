@@ -16,7 +16,7 @@ const CheckoutDetails: React.FC<CheckoutDetailsProps> = ({
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="bg-[#262626] border border-[#383B42] rounded-lg p-6">
+      <div className="bg-[#262626] border border-[#383B42] rounded-lg lg:p-6">
         <div className="space-y-4">
           {selectedItems.map((item) => {
             const current = itemTotals[item.id];
@@ -102,7 +102,7 @@ const CheckoutDetails: React.FC<CheckoutDetailsProps> = ({
               Bangalau Road No 23, RT 4/RW 6, Kinajaya
             </p>
 
-            <div className="flex justify-between gap-4 text-sm pt-10 ">
+            <div className="grid grid-cols-2  md:grid-cols-2 lg:flex lg:justify-between gap-4 text-sm pt-10 text-wrap">
               <div className="flex flex-col gap-2">
                 <span className="text-text-m font-medium">Country</span>
                 <p className="text-text-l font-medium">Indonesia</p>

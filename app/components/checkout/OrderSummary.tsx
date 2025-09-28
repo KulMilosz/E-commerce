@@ -34,7 +34,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
     transactionFees;
 
   return (
-    <div className="text-lg font-semibold flex flex-col gap-4 p-6 ml-12 mr-10 bg-[#262626] border-1 border-[#383B42] rounded-lg min-w-100 min-h-70 justify-between">
+    <div className="text-lg font-semibold flex flex-col gap-4 p-6  bg-[#262626] border-1 border-[#383B42] rounded-lg w-full lg:min-w-100 min-h-70 justify-between">
       <div className="space-y-3">
         <h3 className="text-text-l font-medium">Total Product</h3>
         <div className="flex justify-between items-center">

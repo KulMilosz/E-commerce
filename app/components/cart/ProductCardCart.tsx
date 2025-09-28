@@ -52,7 +52,7 @@ export default function ProductCardCart({
   };
 
   return (
-    <div className="flex items-center gap-4 w-full bg-[#262626] border-1 border-[#383B42] rounded-lg h-full p-6 justify-between">
+    <div className="flex items-center gap-4 w-full bg-[#262626] border-1 border-[#383B42] rounded-lg h-full p-6 justify-between flex-col lg:flex-row">
       <div className="flex space-x-8 h-full">
         <div className="relative w-43 h-35 p-3 bg-[#262626] rounded-xl border-2 border-[#383B42]">
           <div className="relative w-full h-full rounded-md overflow-hidden">
@@ -79,7 +79,7 @@ export default function ProductCardCart({
       </div>
 
       <div
-        className={`flex flex-col h-full ${
+        className={`flex flex-col h-full lg:gap-0 gap-8 ${
           showRemoveButton ? "justify-between" : "justify-end"
         }`}
       >

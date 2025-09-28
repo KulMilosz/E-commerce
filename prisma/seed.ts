@@ -66,7 +66,7 @@ async function main() {
     data: {
       name: "Mouse",
       description: "Computer mice and pointing devices",
-      image: "https://i.ibb.co/YK4Gr06/mouse-img.png",
+      image: "https://i.ibb.co/4RFR2QBQ/Image.png",
       exploreInfo: "Precision pointing devices for gaming and productivity",
     },
   });
@@ -75,8 +75,7 @@ async function main() {
     data: {
       name: "Monitor",
       description: "Computer monitors and displays",
-      image:
-        "https://i.ibb.co/gLyzkN6S/ad1a62b3939f5147fb9c66c5e3d3c48daac93746.png",
+      image: "https://i.ibb.co/4RFR2QBQ/Image.png",
       exploreInfo: "High-quality displays for work and entertainment",
     },
   });
