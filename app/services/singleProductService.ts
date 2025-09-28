@@ -4,7 +4,12 @@ export async function getProduct(
   id: string
 ): Promise<ProductDetailInfo | null> {
   try {
-    const response = await fetch(`/api/products/${id}`, {
+    // Automatyczne wykrywanie URL w produkcji
+    const baseUrl = process.env.NEXTAUTH_URL || 
+                   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
+                   'http://localhost:3000';
+    
+    const response = await fetch(`${baseUrl}/api/products/${id}`, {
       cache: "no-store",
     });
 

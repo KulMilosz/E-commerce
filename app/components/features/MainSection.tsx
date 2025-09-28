@@ -7,10 +7,15 @@ import { getCategories } from "../../services/categoriesService";
 import { ProductWithNumericPrice } from "../../types";
 
 const MainSection = async () => {
+  // Automatyczne wykrywanie URL w produkcji
+  const baseUrl = process.env.NEXTAUTH_URL || 
+                 process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
+                 'http://localhost:3000';
+  
   const [categories, productsResponse, brandsResponse] = await Promise.all([
     getCategories(),
-    fetch("/api/products/random", { cache: "no-store" }),
-    fetch("/api/brands", { cache: "no-store" }),
+    fetch(`${baseUrl}/api/products/random`, { cache: "no-store" }),
+    fetch(`${baseUrl}/api/brands`, { cache: "no-store" }),
   ]);
 
   const productsData = await productsResponse.json();
