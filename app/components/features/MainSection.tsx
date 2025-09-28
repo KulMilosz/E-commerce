@@ -7,10 +7,9 @@ import { getCategories } from "../../services/categoriesService";
 import { ProductWithNumericPrice } from "../../types";
 
 const MainSection = async () => {
-  // Automatyczne wykrywanie URL w produkcji
+  // Używamy zmiennych środowiskowych
   const baseUrl = process.env.NEXTAUTH_URL || 
-                 process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
-                 'http://localhost:3000';
+                 (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
   
   const [categories, productsResponse, brandsResponse] = await Promise.all([
     getCategories(),

@@ -13,10 +13,9 @@ export async function getProducts(
   if (filters.maxPrice) params.append("maxPrice", filters.maxPrice);
   if (filters.sortBy) params.append("sortBy", filters.sortBy);
 
-  // Automatyczne wykrywanie URL w produkcji
+  // Używamy zmiennych środowiskowych
   const baseUrl = process.env.NEXTAUTH_URL || 
-                 process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
-                 'http://localhost:3000';
+                 (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
   const response = await fetch(`${baseUrl}/api/products?${params.toString()}`);
 
   if (!response.ok) {
