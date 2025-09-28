@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Breadcrumb from "../components/layout/Breadcrumb";
 import { CartItem, CartResponse } from "../types";
@@ -8,7 +8,7 @@ import CheckoutDetails from "../components/checkout/CheckoutDetails";
 import OrderSummary from "../components/checkout/OrderSummary";
 import { showNotification } from "../components/providers/NotificationProvider";
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [selectedItems, setSelectedItems] = useState<CartItem[]>([]);
@@ -198,5 +198,13 @@ export default function CheckoutPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={<div className="p-10">Loading...</div>}>
+      <CheckoutContent />
+    </Suspense>
   );
 }
