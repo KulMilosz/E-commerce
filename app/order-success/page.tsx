@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import ProductCardCart from "../components/cart/ProductCardCart";
 import { showNotification } from "../components/providers/NotificationProvider";
 import { OrderSuccessOrder } from "../types";
 
-export default function OrderSuccessPage() {
+function OrderSuccessContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [order, setOrder] = useState<OrderSuccessOrder | null>(null);
@@ -221,5 +221,17 @@ export default function OrderSuccessPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function OrderSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="text-white text-lg">Loading...</div>
+      </div>
+    }>
+      <OrderSuccessContent />
+    </Suspense>
   );
 }
