@@ -3,11 +3,17 @@ import { authOptions } from "@/app/lib/auth";
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
 
-function convertOrderToNumeric(order: any) {
+function convertOrderToNumeric(order: {
+  totalAmount: unknown;
+  orderItems: Array<{
+    priceAtPurchase: unknown;
+    product: { price: unknown };
+  }>;
+}) {
   return {
     ...order,
     totalAmount: Number(order.totalAmount),
-    orderItems: order.orderItems.map((item: any) => ({
+    orderItems: order.orderItems.map((item) => ({
       ...item,
       priceAtPurchase: Number(item.priceAtPurchase),
       product: {
@@ -18,13 +24,14 @@ function convertOrderToNumeric(order: any) {
   };
 }
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {
+    const { id } = await params;
     const order = await prisma.order.findUnique({
-      where: { id: params.id, userId: session.user.id },
+      where: { id, userId: session.user.id },
       include: {
         orderItems: {
           include: {
@@ -37,7 +44,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
     if (!order) return NextResponse.json({ error: "Order not found" }, { status: 404 });
 
     return NextResponse.json(convertOrderToNumeric(order));
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch order" }, { status: 500 });
   }
 }
