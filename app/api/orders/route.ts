@@ -2,12 +2,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
+import { ApiOrder, ApiOrderItem, QuantityData } from "@/app/types";
 
-function convertOrderToNumeric(order: any) {
+function convertOrderToNumeric(order: ApiOrder) {
   return {
     ...order,
     totalAmount: Number(order.totalAmount),
-    orderItems: order.orderItems.map((item: any) => ({
+    orderItems: order.orderItems.map((item: ApiOrderItem) => ({
       ...item,
       priceAtPurchase: Number(item.priceAtPurchase),
       product: {
@@ -36,7 +37,7 @@ export async function GET() {
     });
 
     return NextResponse.json(orders.map(convertOrderToNumeric));
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch orders" }, { status: 500 });
   }
 }
@@ -68,7 +69,7 @@ export async function POST(req: Request) {
     }
 
     const itemsToProcess = cart.cartItems.map((item) => {
-      const quantityData = itemsWithQuantities?.find((q: any) => q.cartItemId === item.id);
+      const quantityData = itemsWithQuantities?.find((q: QuantityData) => q.cartItemId === item.id);
       const finalQuantity = quantityData ? quantityData.quantity : item.quantity;
       
       if (finalQuantity > item.product.stock) {
@@ -133,7 +134,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json(convertOrderToNumeric(createdOrder), { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to create order" }, { status: 500 });
   }
 }

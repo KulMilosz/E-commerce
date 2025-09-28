@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ProductsHeaderProps } from '../../types';
 
-export default function ProductsHeader({ totalProducts, sortBy, show }: ProductsHeaderProps) {
+export default function ProductsHeader({ sortBy, show }: ProductsHeaderProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 

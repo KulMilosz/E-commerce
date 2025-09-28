@@ -40,7 +40,7 @@ export default function ProductCardCart({
             duration: 3000,
           });
         }
-      } catch (error) {
+      } catch {
         showNotification({
           type: "error",
           title: "Error",

@@ -53,7 +53,7 @@ export async function GET(
       },
       createdAt: product.createdAt
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

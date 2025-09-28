@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 import { prisma } from "@/app/lib/prisma";
-import { Cart, CartItem, Product } from "@/app/generated/prisma";
 import { CartWithProducts } from "@/app/types";
 
 function mapCartItemPrice(cart: CartWithProducts) {

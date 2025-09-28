@@ -2,6 +2,7 @@ import { Product, Category } from "../generated/prisma";
 import { ReactNode } from "react";
 import { z } from "zod";
 import { loginSchema, registerSchema, contactSchema } from "../components/login/loginValidation";
+import { Decimal } from "@prisma/client/runtime/library";
 
 export interface Notification {
   id: string;
@@ -255,6 +256,31 @@ export interface User {
   orders: Order[];
 }
 
+// API Order Types (for Prisma queries)
+export interface ApiOrderItem {
+  id: string;
+  priceAtPurchase: number | string | Decimal;
+  product: {
+    id: string;
+    name: string;
+    price: number | string | Decimal;
+    category: { id: string; name: string };
+    brand: { id: string; name: string };
+  };
+}
+
+export interface ApiOrder {
+  id: string;
+  totalAmount: number | string | Decimal;
+  orderItems: ApiOrderItem[];
+}
+
+export interface QuantityData {
+  cartItemId: string;
+  quantity: number;
+}
+
+// Frontend Order Types
 export interface Order {
   id: string;
   createdAt: string;

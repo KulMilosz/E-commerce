@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/components/layout/CartButton.jsx"
+    "app/components/layout/CartButton.tsx"
   ],
   "exclude": ["node_modules"]
 }

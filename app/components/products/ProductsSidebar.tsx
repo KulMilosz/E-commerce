@@ -32,7 +32,7 @@ export default function ProductsSidebar({
     setLocalMaxPrice(maxPrice || '');
   }, [maxPrice]);
 
-  const updateFilters = (key: string, value: string) => {
+  const updateFilters = useCallback((key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     if (value && value !== 'all') {
       params.set(key, value);
@@ -40,7 +40,7 @@ export default function ProductsSidebar({
       params.delete(key);
     }
     router.push(`/products?${params.toString()}`);
-  };
+  }, [searchParams, router]);
 
   const debouncedUpdateMinPrice = useCallback(
     (() => {
@@ -52,7 +52,7 @@ export default function ProductsSidebar({
         }, 500);
       };
     })(),
-    [searchParams, router]
+    [updateFilters]
   );
 
   const debouncedUpdateMaxPrice = useCallback(
@@ -65,7 +65,7 @@ export default function ProductsSidebar({
         }, 500);
       };
     })(),
-    [searchParams, router]
+    [updateFilters]
   );
 
   if (!isMounted) {

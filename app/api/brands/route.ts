@@ -13,7 +13,7 @@ export async function GET() {
     ).filter(Boolean);
 
     return NextResponse.json({ brands: sortedBrands });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
