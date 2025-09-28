@@ -15,6 +15,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
+          // Normalize email to lowercase if it's an email
           const normalizedEmailOrMobile = credentials.emailOrMobile.includes("@") 
             ? credentials.emailOrMobile.toLowerCase() 
             : credentials.emailOrMobile;
