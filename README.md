@@ -92,13 +92,13 @@ npm run dev
 ## ✅ Functional Requirements
 
 - ✅ **Backend API** - Complete with database integration
-- ⏳ Product listing page
-- ⏳ Product detail page
-- ⏳ Shopping cart with add/edit/remove functionality
-- ⏳ Checkout form
-- ⏳ Responsive design according to Figma
-- ⏳ Payment integration (optional)
-- ⏳ User authentication/registration (optional)
+- ✅ Product listing page
+- ✅ Product detail page
+- ✅ Shopping cart with add/edit/remove functionality
+- ✅ Checkout form
+- ✅ Responsive design according to Figma
+- ✅ Payment integration (optional)
+- ✅ User authentication/registration (optional)
 
 ---
 
