@@ -54,7 +54,9 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
       </div>
       <div className="my-8 mr-6 flex justify-between items-center">
         <span className="text-text-l font-medium text-[#B0B0B0]">Subtotal</span>
-        <span className="text-heading-w-5 font-medium">${total}</span>
+        <span className="lg:text-heading-w-5 text-heading-m-5 font-medium">
+          ${total}
+        </span>
       </div>
       <button
         onClick={() => addToCart(product, quantity)}

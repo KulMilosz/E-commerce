@@ -40,7 +40,7 @@ const CategoryCarousel = ({ categories }: CategoryCarouselProps) => {
       <div className="relative bg-[#222327] rounded-md border border-[#383B42] overflow-hidden h-96 md:h-[500px]">
         <div className="flex flex-col md:flex-row h-full">
           <div className="flex-1 px-4 md:pl-32 md:pr-12 py-8 md:pt-32 md:pb-20 flex flex-col justify-center">
-            <h2 className=" md:text-4xl text-heading-w-4 font-medium mb-4 md:mb-6 text-[#E7E7E7]">
+            <h2 className=" md:text-4xl lg:text-heading-w-4 text-heading-m-4 font-medium mb-4 md:mb-6 text-[#E7E7E7]">
               {currentCategory.name}
             </h2>
             <p className=" text-text-m md:text-lg mb-6 md:mb-8 leading-relaxed font-normal text-[#E7E7E7]">

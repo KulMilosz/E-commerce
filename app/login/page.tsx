@@ -3,7 +3,7 @@ import LoginForm from "../components/login/LoginForm";
 
 export default async function LoginPage() {
   return (
-    <div className="flex flex-col mt-19 space-y-8 justify-center items-center  ml-124 mr-124 mb-19">
+    <div className="flex flex-col lg:mt-19 space-y-8 justify-center items-center p-6 mx-auto max-w-100 md:max-w-114 lg:max-w-126 ">
       <div className="flex justify-center items-center">
         <Logo />
       </div>

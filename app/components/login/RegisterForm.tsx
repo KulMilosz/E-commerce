@@ -56,7 +56,9 @@ const RegisterForm: React.FC<LoginFormProps> = () => {
 
   return (
     <div className="w-full h-full p-6 bg-[#262626] border-[#383B42] border-2 rounded-lg text-text-m flex flex-col">
-      <h2 className="mb-6 text-heading-w-6 font-medium">Create Account</h2>
+      <h2 className="mb-6 lg:text-heading-w-6 text-heading-m-6 font-medium">
+        Create Account
+      </h2>
       <div
         className={`border-t border-[#383B42] mr-6 ml-6 mt-5 ${
           errorMessage ? "mb-2" : "mb-8"

@@ -66,14 +66,16 @@ export default async function ProductDetailPage({
           <div className="w-full h-full">
             <div className="flex flex-col justify-between h-full">
               <div className="flex flex-col ">
-                <p className="text-heading-w-5 font-medium">{product.name}</p>
+                <p className="lg:text-heading-w-5 text-heading-m-5 font-medium">
+                  {product.name}
+                </p>
                 <div className="inline-block bg-[#E5610A] text-white text-text-s font-medium px-2.5 py-1.5 rounded-md w-fit mt-5">
                   <p className="text-text-s font-medium">
                     {product.category.name}
                   </p>
                 </div>
                 <div className="mt-8">
-                  <p className="text-heading-w-4 font-medium">
+                  <p className="lg:text-heading-w-4 text-heading-m-4 font-medium">
                     ${product.price}
                   </p>
                 </div>

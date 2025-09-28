@@ -18,9 +18,12 @@ export default function ProductCardCart({
   showQuantitySelector?: boolean;
   cartItemId?: string;
 }) {
-  const handleQuantityChange = async (newQuantity: number, newTotal: number) => {
+  const handleQuantityChange = async (
+    newQuantity: number,
+    newTotal: number
+  ) => {
     onItemTotalChange?.(newQuantity, newTotal);
-    
+
     if (cartItemId) {
       try {
         const response = await fetch("/api/cart", {
@@ -28,7 +31,7 @@ export default function ProductCardCart({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ cartItemId, quantity: newQuantity }),
         });
-        
+
         if (!response.ok) {
           showNotification({
             type: "error",
@@ -63,11 +66,15 @@ export default function ProductCardCart({
         </div>
 
         <div className="flex flex-col h-full min-h-[140px] justify-between">
-          <span className="text-heading-w-7 font-medium">{product.name}</span>
+          <span className="lg:text-heading-w-7 text-heading-m-7 font-medium">
+            {product.name}
+          </span>
           <div className="inline-block bg-[#E5610A] text-white text-text-s font-medium px-2.5 py-1.5 rounded-md w-fit">
             {product.category?.name || "Unknown"}
           </div>
-          <span className="text-heading-w-6 font-medium">${product.price}</span>
+          <span className="lg:text-heading-w-6 text-heading-m-6 font-medium">
+            ${product.price}
+          </span>
         </div>
       </div>
 

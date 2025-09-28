@@ -88,7 +88,7 @@ export default function CheckoutPage() {
   const handlePayNow = async () => {
     try {
       const selectedCartItemIds = selectedItems.map((item) => item.id);
-      
+
       const itemsWithQuantities = selectedItems.map((item) => {
         const currentTotal = itemTotals[item.id];
         return {
@@ -99,7 +99,9 @@ export default function CheckoutPage() {
 
       const totalProductPrice = selectedItems.reduce((sum, item) => {
         const current = itemTotals[item.id];
-        const total = current ? current.total : item.quantity * item.product.price;
+        const total = current
+          ? current.total
+          : item.quantity * item.product.price;
         return sum + total;
       }, 0);
 
@@ -172,7 +174,9 @@ export default function CheckoutPage() {
 
       <div className="flex w-full justify-between gap-8 mt-8">
         <div className="flex flex-col gap-8 w-full max-w-4xl">
-          <h2 className="text-heading-w-6 font-medium ">Your Order</h2>
+          <h2 className="lg:text-heading-w-6 text-heading-m-6 font-medium ">
+            Your Order
+          </h2>
           <CheckoutDetails
             selectedItems={selectedItems}
             itemTotals={itemTotals}

@@ -97,7 +97,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
           <span className="text-text-l font-medium text-[#FCFCFC]">
             Grand Total
           </span>
-          <span className="text-heading-w-5 font-medium text-[#FCFCFC]">
+          <span className="lg:text-heading-w-5 text-heading-m-5 font-medium text-[#FCFCFC]">
             ${grandTotal.toFixed(2)}
           </span>
         </div>

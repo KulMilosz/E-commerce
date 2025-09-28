@@ -27,21 +27,23 @@ export default function ContactPage() {
 
     reset();
   };
+
   return (
     <div className="flex flex-col pb-20 pt-10">
       <Breadcrumb />
 
       <div className="mt-8">
-        <h1 className="text-heading-w-4 font-medium mb-8 text-[#E7E7E7]">
+        <h1 className="lg:text-heading-w-4 text-heading-m-4 font-medium mb-8 text-[#E7E7E7] text-center">
           Contact Us
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-[#222327] border border-[#383B42] rounded-md p-6 flex flex-col justify-center items-center">
-            <h2 className="text-heading-w-6 font-medium mb-4 text-[#E7E7E7] pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-4 w-full max-w-6xl mx-auto">
+          {/* Lewa kolumna - Get in Touch */}
+          <div className="bg-[#222327] border border-[#383B42] rounded-md p-6 flex flex-col w-full">
+            <h2 className="lg:text-heading-w-6 text-heading-m-6 font-medium mb-4 text-[#E7E7E7] pb-6 text-center">
               Get in Touch
             </h2>
-            <div className="flex gap-20">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 justify-center items-start w-full">
               <div className="space-y-4">
                 <div>
                   <h3 className="text-text-m font-medium text-[#F29145] mb-2">
@@ -76,12 +78,13 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="bg-[#222327] border border-[#383B42] rounded-md p-6 items-center justify-center flex flex-col">
-            <h2 className="text-heading-w-6 font-medium mb-4 text-[#E7E7E7] pb-5">
+          {/* Prawa kolumna - Business Hours */}
+          <div className="bg-[#222327] border border-[#383B42] rounded-md p-6 flex flex-col w-full">
+            <h2 className="lg:text-heading-w-6 text-heading-m-6 font-medium mb-4 text-[#E7E7E7] pb-5 text-center">
               Business Hours
             </h2>
             <div className="space-y-3">
-              <div className="flex justify-between gap-20">
+              <div className="flex justify-between gap-4">
                 <span className="text-text-m text-[#E7E7E7]">
                   Monday - Friday
                 </span>
@@ -103,8 +106,9 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="mt-8 bg-[#222327] border border-[#383B42] rounded-md p-6">
-          <h2 className="text-heading-w-6 font-medium mb-4 text-[#E7E7E7]">
+        {/* Formularz */}
+        <div className="mt-8 bg-[#222327] border border-[#383B42] rounded-md p-6 max-w-4xl mx-auto">
+          <h2 className="lg:text-heading-w-6 text-heading-m-6 font-medium mb-4 text-[#E7E7E7] text-center">
             Send us a Message
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -174,12 +178,14 @@ export default function ContactPage() {
                 </p>
               )}
             </div>
-            <button
-              type="submit"
-              className="bg-[#F29145] hover:bg-[#E5610A] text-black font-medium px-6 py-3 rounded-md transition-colors duration-300 cursor-pointer"
-            >
-              Send Message
-            </button>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="bg-[#F29145] hover:bg-[#E5610A] text-black font-medium px-8 py-3 rounded-md transition-colors duration-300 cursor-pointer"
+              >
+                Send Message
+              </button>
+            </div>
           </form>
         </div>
       </div>

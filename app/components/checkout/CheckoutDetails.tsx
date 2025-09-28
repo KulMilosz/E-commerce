@@ -61,7 +61,9 @@ const CheckoutDetails: React.FC<CheckoutDetailsProps> = ({
           </label>
         </div>
       </div>
-      <span className="text-heading-w-6 font-medium">Address</span>
+      <span className="lg:text-heading-w-6 text-heading-m-6 font-medium">
+        Address
+      </span>
       <div className="bg-[#262626] border border-[#383B42] rounded-lg p-6">
         <div className="flex border-b border-[#383B42] mb-6 w-full">
           <button
@@ -141,7 +143,9 @@ const CheckoutDetails: React.FC<CheckoutDetailsProps> = ({
           </div>
         )}
       </div>
-      <h2 className="text-heading-w-6 font-medium ">Shipping</h2>
+      <h2 className="lg:text-heading-w-6 text-heading-m-6 font-medium ">
+        Shipping
+      </h2>
       <div className="bg-[#262626] border border-[#383B42] rounded-lg p-6">
         <div className="flex gap-2 items-center justify-start">
           <Image
@@ -153,7 +157,9 @@ const CheckoutDetails: React.FC<CheckoutDetailsProps> = ({
           <span className="text-text-l font-medium">NexusHub Courier</span>
         </div>
       </div>
-      <h2 className="text-heading-w-6 font-medium ">Payment Method</h2>
+      <h2 className="lg:text-heading-w-6 text-heading-m-6 font-medium ">
+        Payment Method
+      </h2>
       <div className="bg-[#262626] border border-[#383B42] rounded-lg p-6">
         <div className="flex gap-2 items-center justify-start">
           <Image

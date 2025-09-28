@@ -53,6 +53,7 @@ export default function CartPage() {
         return clone;
       });
     } catch (error) {
+      console.log(error);
       showNotification({
         type: "error",
         title: "Error",
@@ -64,16 +65,12 @@ export default function CartPage() {
 
   if (loading)
     return (
-      <div className="flex justify-center items-center">
-        Loading cart...
-      </div>
+      <div className="flex justify-center items-center">Loading cart...</div>
     );
   if (error) return <div>Error: {error}</div>;
   if (!cart || cart.cartItems.length === 0)
     return (
-      <div className="flex justify-center items-center">
-        Your cart is empty
-      </div>
+      <div className="flex justify-center items-center">Your cart is empty</div>
     );
 
   return (

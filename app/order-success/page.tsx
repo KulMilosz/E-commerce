@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import ProductCardCart from "../components/cart/ProductCardCart";
-import Link from "next/link";
 import { showNotification } from "../components/providers/NotificationProvider";
 import { OrderSuccessOrder } from "../types";
 
@@ -90,7 +89,7 @@ export default function OrderSuccessPage() {
           ✓
         </div>
         <div className="flex justify-center">
-          <h1 className="text-heading-w-6 font-medium">
+          <h1 className="lg:text-heading-w-6 text-heading-m-6 font-medium">
             Thanks for Your Order!
           </h1>
         </div>
@@ -173,7 +172,7 @@ export default function OrderSuccessPage() {
         <div className="flex flex-col gap-8">
           <div className="flex justify-between">
             <span className="text-text-l font-medium">Grand total</span>
-            <span className="text-heading-w-5 font-medium">
+            <span className="lg:text-heading-w-5 text-heading-m-5 font-medium">
               ${order.totalAmount.toFixed(2)}
             </span>
           </div>
