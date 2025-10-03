@@ -60,7 +60,7 @@ docker-compose.yml       # PostgreSQL container setup
 ```bash
 # Clone repository
 git clone <repository-url>
-cd e-commerce-cursor
+cd e-commerce
 
 # Install dependencies
 npm install
