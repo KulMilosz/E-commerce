@@ -25,7 +25,6 @@ The goal is to create a **functional online store** using **Next.js** and the pr
 - PostgreSQL
 - Docker
 - ESLint & Prettier
-- Payment integration
 
 ---
 
