@@ -3,6 +3,10 @@
 Final project developed as part of the course.  
 The goal is to create a **functional online store** using **Next.js** and the provided [Figma design]
 
+## 🚀 Live View
+[💻 View Live Project](https://e-commerce-liart-xi-56.vercel.app/login?callbackUrl=https%3A%2F%2Fe-commerce-liart-xi-56.vercel.app%2F)
+
+
 ## 🎯 Project Objectives
 
 - Build an online store matching the Figma design.
