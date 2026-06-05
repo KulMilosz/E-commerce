@@ -107,7 +107,7 @@ npm run dev
 
 ## 👤 Author
 
-Name / KulMilosz
+ KulMilosz
 
 ---
 
